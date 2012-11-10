@@ -38,7 +38,7 @@ module.exports = function(app) {
                     if(!res){
                         
                         var data = {
-                            id: airplane.name,
+                            name: airplane.name,
                             plane:airplane,
                             x:25.139636,
                             y:121.495840,
