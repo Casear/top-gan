@@ -1,32 +1,4 @@
-var user;
-var deg = 0;
-var countries={
-    "USA":{
-        x: 39.866745,
-        y: -98.051373
-    },
-    "Korea":{
-        x:36.204317,
-        y:127.868271
-    },
-    "China":{
-        x:33.819698,
-        y:102.890634
-    },
-    "India":{
-        x:20.349177,
-        y:78.676767
-    
-    },
-    "European Union":{
-        x:49.435569,
-        y:16.94459
-    },
-    "Taiwan":{
-        x:23.759624,
-        y:121.007089
-    }
-}
+
 socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
@@ -36,6 +8,22 @@ socket.on('connect', function() {
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
 	    initialize_map();
+
+	    socket.on('war', function(data) {
+			//console.log('socket.on war, data:' + data);
+			setMarker(data);
+		});
+
+		socket.on('locked', function(data) {
+			console.log('socket.on locked, data:' + data);
+			audioPlay('waring');
+		});
+
+		socket.on('attacked', function(data) {
+			//console.log('socket.on attacked, data:' + data);
+			bomb();
+			audioPlay('exl');
+		});
 	});
     socket.on('fail',function(data){
         console.log('user exsit');
@@ -45,10 +33,7 @@ socket.on('connect', function() {
 		//console.log('socket.on system, data:' + data.msg);
 	});
 
-	socket.on('war', function(data) {
-		//console.log('socket.on war, data:' + data);
-		setMarker(data);
-	});
+	
 });
 
 function join(name, country, aircraft) {
@@ -63,6 +48,10 @@ function fly(name, x, y, r) {
 
 function rotate(name, x, y, r) {
 	deg += r;
+	if (deg == 360 || deg == -360) {
+		deg = 0;
+	}
+	user.r = deg;
 	//console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
 	// 	'transform':'rotate(' + deg + 'deg)',
@@ -82,12 +71,18 @@ function rotate(name, x, y, r) {
 
 function lock(name) {
 	//console.log('call socket.emit lock, name: ' + name );
+	audioPlay('lock');
 	socket.emit('lock', { name: name });
 }
 
 function attack(name) {
 	//console.log('call socket.emit attack, name: ' + name );
 	socket.emit('attack', { name: name });
+}
+
+function audioPlay(name) {
+	var obj = document.getElementById(name);
+	obj.play();
 }
 
 document.onkeydown =  function(evt) {

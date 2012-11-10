@@ -25,6 +25,18 @@ module.exports = function(app) {
             return Math.floor(Math.random() * (to - from + 1) + from);
         }
 
+        function getAirplane(name,cb){
+            
+            store.hget('airplanes',name,function(err,res){
+                if(!res){
+                    console.log('error, can not find airplane');
+                    return;
+                }
+                var aPlane = JSON.parse(res);
+                cb(aPlane);
+            });
+        }
+
         var getAirplanes = function(action){
             var data = [];
             store.hgetall("airplanes",function(err,obj){
@@ -69,7 +81,7 @@ module.exports = function(app) {
                         });
                     }
                     else{
-                        socket.emit('error',{msg:'user name exist!!'});
+                        socket.emit('error',{msg:'user name ' + airplane.name +' exist!!'});
                     }
                 });
 
@@ -83,10 +95,23 @@ module.exports = function(app) {
                 });
             });
 
+            socket.on('lock',function(name){
+                getAirplane(name,function(data){
+                    console.log(data.id);
+                    io.sockets.socket(data.id).emit('locked');
+                });
+            });
+
+            socket.on('attack',function(name){
+                var bom = {};
+
+                io.sockets.on('war',bom);
+            });
+
             socket.on('fly', function(plane) {
                 store.hget('airplanes',plane.name,function(err,res){
                     if(!res){
-                        socket.emit('error',{msg:'error, can not find airplane'});
+                        socket.emit('error',{msg:'error, can not find airplane',data:plane});
                         return;
                     }
                     var aPlane = JSON.parse(res);
