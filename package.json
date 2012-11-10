@@ -1,6 +1,6 @@
 {
 	"name": "nko3-top-gan",
-	"version": "0.0.0-2",
+	"version": "0.0.0-3",
 	"description": "Top Gan",
 	"main": "server.js",
 	"scripts": {
@@ -14,7 +14,7 @@
 		"express": "3.0.2",
 		"hogan-express": "*",
 		"redis": "*",
-		"hiredis": "*"
+        "hiredis":"*",
 		"socket.io": "*",
 		"connect-redis": "*",
 		"hjs": "*",
