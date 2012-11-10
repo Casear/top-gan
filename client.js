@@ -3,10 +3,23 @@ var io = require('socket.io-client')
     , host = 'http://localhost'
     , socket = io.connect(host + ':' + port);
     
+var name = process.argv[2];
+
+var plane = {
+    name:name,
+    country:'taiwan',
+    type:1
+};
+
 socket.on('connect',function(){
-    socket.emit('join','ken.yeh');
+    socket.emit('join',plane);
     socket.on('system',function(data){
-        console.log(data); 
+        console.log(data.msg); 
+
+    });
+
+    socket.on('war',function(data){
+        console.log(data);
     });
 });
 
