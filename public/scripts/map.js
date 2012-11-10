@@ -1,6 +1,7 @@
 var map;
 var markersArray = [];
 var selMarker ;
+var increX = increY = 0;
 function initialize_map() {
 	console.log("initialize_map");
 	var latlng = new google.maps.LatLng(user.x, user.y);
@@ -9,18 +10,18 @@ function initialize_map() {
 	  center: latlng,
 	  disableDefaultUI: true,
 	  scrollwheel: false,
-	navigationControl: false,
-	mapTypeControl: false,
-	scaleControl: false,
-	draggable: false,
+	  navigationControl: false,
+	  mapTypeControl: false,
+	  scaleControl: false,
+	  draggable: false,
 	  mapTypeId: google.maps.MapTypeId.SATELLITE
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 	    myOptions);
 
 	self.setInterval(function(){
-		var newlat = user.x  ;
-		var newlng = user.y + 0.03;
+		var newlat = user.x + 1 + increX;
+		var newlng = user.y + increY;
 			if(newlat > 45)
 				newlat = newlat - 90 ;
 		user.x = newlat;
@@ -52,8 +53,14 @@ function initialize_map() {
 }
 function Fire ()
 {
+	
 	//Fire the Missile
 	alert('Fire the Missile');
+}
+function PlaneRotation()
+{
+	//sin 10 = 0.173648178
+	//cos 10 = 0.984807753
 }
 function setMarker (json)
 {
