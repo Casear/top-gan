@@ -48,8 +48,9 @@ module.exports = function(app) {
                     if(!res){
                         var x = airplane.x || 25.0,
                             y = airplane.y || 121.0;
-                        
+
                         var data = {
+                            id: socket.id,
                             name: airplane.name,
                             plane: airplane,
                             x: x + Math.random(),
@@ -83,7 +84,6 @@ module.exports = function(app) {
             });
 
             socket.on('fly', function(plane) {
-               console.log(plane.name); 
                 store.hget('airplanes',plane.name,function(err,res){
                     if(!res){
                         socket.emit('error',{msg:'error, can not find airplane'});
