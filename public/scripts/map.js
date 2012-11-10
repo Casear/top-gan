@@ -1,6 +1,6 @@
 var map;
 var markersArray = [];
-user = { "n":"user", "x":25.139636, "y":121.495840, "r":0 };
+
 function initialize_map() {
 	var latlng = new google.maps.LatLng(user.x, user.y);
 	var myOptions = {
@@ -15,13 +15,10 @@ function initialize_map() {
 		var newlatlng = new google.maps.LatLng(map.center.lat()+0.1, map.center.lng());
 		map.setCenter(newlatlng);
 		setMarker([{"n":"n","x":newlatlng.lat(),"y":newlatlng.lng() }]);
-		fly(map.center.lat() , map.center.lng())
+		fly(user.x , user.y ,user.r)
 		user.x = newlatlng.lat();
 		user.y = newlatlng.lng();
-		},250);
-
-	// setMarker([{"n":"n","x":34.3,"y":150.6}]);
-	// setMarker([{"n":"n","x":35.3,"y":151.6},{"n":"n1","x":36.397,"y":152.644}]);
+		},500);
 }
 function setMarker (json)
 {
