@@ -17,12 +17,12 @@ socket.on('war', function(data) {
 
 function fly(x, y, r) {
 	console.log('call socket.emit fly, x:' + x + ', y:' + y + ', deg:' + r);
-	socket.emit('fly', { x: x, y: y, r: deg });
+	socket.emit('fly', { x: x, y: y, r: r });
 }
 
 function rotate(name, x, y, r) {
 	deg += r;
-	console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + r);
+	console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
 	$('#map_canvas').find('>div>div>div:eq(0)>div').css({
 		'transform':'rotate(' + deg + 'deg)',
     	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
