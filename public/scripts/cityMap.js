@@ -1,7 +1,14 @@
 function createCityMap(map) {
+<<<<<<< HEAD
 	// var query = "SELECT Lat,Long,City,Country FROM 2621505 WHERE Megacity=1";
 	// query = encodeURIComponent(query);
 	// var gvizQuery = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + query);
+=======
+    google.load('visualization', '1');
+    var query = "SELECT Lat,Long,City,Country FROM 2621505 WHERE Megacity=1";
+	query = encodeURIComponent(query);
+	var gvizQuery = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + query);
+>>>>>>> eacc3ed012acf4a7dc6eeb03509fed17638c7b4a
 
 	// var createMarker = function(coordinate,city) {
 	// 		var marker = new google.maps.Marker({
