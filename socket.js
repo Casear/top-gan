@@ -4,8 +4,8 @@ module.exports = function(app) {
 	RedisStore = require('socket.io/lib/stores/redis'),
 	port = null,
 	ip = null
-	, port = 6379
-        , ip = "106.186.16.33"
+	//, port = 6379
+        //, ip = "106.186.16.33"
 	, store = redis.createClient(port,ip)
 	, pub = redis.createClient(port, ip),
 	sub = redis.createClient(port, ip),
@@ -23,6 +23,18 @@ module.exports = function(app) {
 
         function randomFromTo(from, to){
             return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+        function getAirplane(name,cb){
+            
+            store.hget('airplanes',name,function(err,res){
+                if(!res){
+                    console.log('error, can not find airplane');
+                    return;
+                }
+                var aPlane = JSON.parse(res);
+                cb(aPlane);
+            });
         }
 
         var getAirplanes = function(action){
@@ -69,7 +81,7 @@ module.exports = function(app) {
                         });
                     }
                     else{
-                        socket.emit('error',{msg:'user name exist!!'});
+                        socket.emit('error',{msg:'user name ' + airplane.name +' exist!!'});
                     }
                 });
 
@@ -83,10 +95,17 @@ module.exports = function(app) {
                 });
             });
 
+            socket.on('lock',function(name){
+                getAirplane(name,function(data){
+                    console.log(data.id);
+                    io.sockets.socket(data.id).emit('locked');
+                });
+            });
+
             socket.on('fly', function(plane) {
                 store.hget('airplanes',plane.name,function(err,res){
                     if(!res){
-                        socket.emit('error',{msg:'error, can not find airplane'});
+                        socket.emit('error',{msg:'error, can not find airplane',data:plane});
                         return;
                     }
                     var aPlane = JSON.parse(res);
