@@ -3,7 +3,7 @@ var markersArray = [];
 var selMarker;
 var myPlane;
 var increX = increY = 0;
-
+var PlaneUnitPath = 0.1 ; 
 function initialize_map() {
 	console.log("initialize_map");
 	var latlng = new google.maps.LatLng(user.x, user.y);
@@ -23,11 +23,11 @@ function initialize_map() {
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 	    myOptions);
 	//My plane
-	//var imgPath = 'images/fighter' + user.plane.type[1] + '.png' ;
+	var imgPath = 'images/fighter' + user.plane.type[1] + '.png' ;
 
 
 	var myimage = new google.maps.MarkerImage(
-			'images/fighter1.png',
+			imgPath,
 			null, // size
 			null, // origin
 			new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
@@ -49,53 +49,53 @@ function initialize_map() {
 
 
 	window.setInterval(function() {
-
-		var newlat = user.x + 0.1 + increX;
+		PlaneRotation();
+		var newlat = user.x + increX;
 		var newlng = user.y + increY;
-		if (newlat > 45) newlat = newlat - 90;
+		if (newlat > 80) newlat = newlat - 160;
 		user.x = newlat;
 		user.y = newlng;
 		fly(user.name, user.x, user.y, user.r);
 		myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
 		map.setCenter(new google.maps.LatLng(user.x, user.y));
 		},300);
-	    //Other plane
-		var image = new google.maps.MarkerImage(
-			'images/fighter2.png',
-			null, // size
-			null, // origin
-			new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-			new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
-		);
-		selMarker = new google.maps.Marker({
-			flat: true,
-			icon: image,
-			map: map,
-			optimized: false,
-			position: new google.maps.LatLng(user.x, user.y),
-			visible: false
-		});
-		google.maps.event.addListener(selMarker, 'mousedown', function() {
-			Fire();
-		});
-		google.maps.event.addListener(selMarker, 'mouseup', function() {
-			Fire();
-		});
+	 	////Other plane
+		// var image = new google.maps.MarkerImage(
+		// 	'images/fighter2.png',
+		// 	null, // size
+		// 	null, // origin
+		// 	new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+		// 	new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
+		// );
+		// selMarker = new google.maps.Marker({
+		// 	flat: true,
+		// 	icon: image,
+		// 	map: map,
+		// 	optimized: false,
+		// 	position: new google.maps.LatLng(user.x, user.y),
+		// 	visible: false
+		// });
+		// google.maps.event.addListener(selMarker, 'mousedown', function() {
+		// 	Fire();
+		// });
+		// google.maps.event.addListener(selMarker, 'mouseup', function() {
+		// 	Fire();
+		// });
 }
 function Fire ()
 {
-<<<<<<< HEAD
-=======
-	
-
 	//Fire the Missile
->>>>>>> a58811c740776376fe509f8b74440146e6d73776
 	alert('Fire the Missile');
 }
 
 function PlaneRotation() {
 	//sin 10 = 0.173648178
 	//cos 10 = 0.984807753
+		// increX = PlaneUnitPath *  Math.sin( ( 90 - user.r ) / 180 * Math.PI);
+		// increY = PlaneUnitPath *  Math.cos( ( 90 + user.r ) / 180 * Math.PI);
+		increX = PlaneUnitPath *  Math.sin( ( 90 - deg ) / 180 * Math.PI);
+		increY = PlaneUnitPath *  Math.cos( ( 90 + deg ) / 180 * Math.PI);
+		console.log(deg , increX , increY);
 }
 
 
@@ -104,9 +104,6 @@ function setMarker (json)
 {
 	if(user != null)
 	{
-		//json.plane.type
-		
-		
 		var newlatlng = new google.maps.LatLng( user.x , user.y );
 		map.setCenter(newlatlng);
 		 var IsExist = 0;
@@ -121,8 +118,9 @@ function setMarker (json)
 			})
 			if(IsExist == 0)
 			{
+				var imgPath = 'images/fighter' + json.plane.type[1] + '.png' ;
 				var image = new google.maps.MarkerImage(
-						'images/F35-JSF-48px.png',
+						imgPath,
 						null, // size
 						null, // origin
 						new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
