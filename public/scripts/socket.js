@@ -42,7 +42,8 @@ function rotate(name, x, y, r) {
  //      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
 	// });
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
-	map.panDirection(-1,0);
+	//map.panDirection(-1,0);
+	$('#map_canvas').animate({rotate: r +'deg'}, 0);
 
 	var newlatlng = new google.maps.LatLng(x, y);
 	map.setCenter(newlatlng);
@@ -53,7 +54,7 @@ document.onkeydown =  function(evt) {
 	//37 left, 39 right
 	var evt  = (evt) ? evt : ((event) ? event : null); 
 	console.log(evt.keyCode);
-	var r = (evt.keyCode == 37) ? 10 : ((evt.keyCode == 39) ? -10 : 0); 
+	var r = (evt.keyCode == 37) ? -10 : ((evt.keyCode == 39) ? 10 : 0); 
 
 	if (user) {
 		rotate(user.name, user.x, user.y, r);
