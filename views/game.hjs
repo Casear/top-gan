@@ -1,0 +1,6 @@
+<audio src="/musics/fly.mp3" preload autoplay loop>
+<audio controls>
+    <source src="/musics/warning.mp3">
+    <source src="/musics/lock.mp3">
+    <source src="/musics/expl.mp3">
+</audio>

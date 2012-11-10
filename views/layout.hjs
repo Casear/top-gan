@@ -5,6 +5,9 @@
         <title>Top Gan</title>
     </head>
     
-    <body>{{> head}} {{{ yield }}}</body>
+    <body>
+        <audio src="/musics/background.mp3" preload autoplay loop>
+        {{> head}} {{{ yield }}}
+    </body>
 
 </html>
