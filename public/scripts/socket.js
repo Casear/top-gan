@@ -52,13 +52,13 @@ socket.on('connect', function() {
 });
 
 function join(name, country, aircraft) {
-<<<<<<< HEAD
-	//console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
-	socket.emit('join', { name: name, country: country, type: aircraft });
-=======
+
+
+
+
 	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { name: name, country: country, type: aircraft , x:countries[country].x,y:countries[country].y });
->>>>>>> commit
+
 }
 
 function fly(name, x, y, r) {
