@@ -1,10 +1,12 @@
 var map;
 var markersArray = [];
 var selMarker ;
+var myPlane ;
 var increX = increY = 0;
 function initialize_map() {
 	console.log("initialize_map");
 	var latlng = new google.maps.LatLng(user.x, user.y);
+	console.log(user.x + " & " + user.y);
 	var myOptions = {
 	  zoom: 8,
 	  center: latlng,
@@ -19,16 +21,34 @@ function initialize_map() {
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 	    myOptions);
 
-	self.setInterval(function(){
-		var newlat = user.x + 1 + increX;
+	var myimage = new google.maps.MarkerImage(
+			'images/Fighter.jpg',
+			null, // size
+			null, // origin
+			new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+			new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
+		);
+	myPlane = new google.maps.Marker({
+		flat: true,
+		icon: myimage,
+		map: map,
+		optimized: false,
+		position: new google.maps.LatLng(user.x, user.y),
+		visible: true
+		});
+	window.setInterval(function(){
+		
+		var newlat = user.x + 0.1 + increX;
 		var newlng = user.y + increY;
 			if(newlat > 45)
 				newlat = newlat - 90 ;
 		user.x = newlat;
 		user.y = newlng;
 		fly(user.name , user.x , user.y , user.r);
+		myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
+		map.setCenter(new google.maps.LatLng(user.x, user.y));
 		},300);
-	//selMarker
+	    
 		var image = new google.maps.MarkerImage(
 			'images/Fighter.jpg',
 			null, // size
@@ -45,17 +65,17 @@ function initialize_map() {
 			visible: false
 		});
 		google.maps.event.addListener(selMarker, 'mousedown', function() {
-			Fire();
+			//Fire('');
 		});
 		google.maps.event.addListener(selMarker, 'mouseup', function() {
-			Fire();
+			//ire('');
 		});
 }
-function Fire ()
+function Fire (name)
 {
 	
 	//Fire the Missile
-	alert('Fire the Missile');
+	alert('Fire the Missile' + name);
 }
 function PlaneRotation()
 {
@@ -64,6 +84,7 @@ function PlaneRotation()
 }
 function setMarker (json)
 {
+	console.log("setMarker"+user.x + " & " + user.y);
 	var newlatlng = new google.maps.LatLng( user.x , user.y );
 	map.setCenter(newlatlng);
 
@@ -112,7 +133,7 @@ function setMarker (json)
 				selMarker.setVisible(false);
 			});
 			google.maps.event.addListener(markersArray[index], 'click', function() {
-				Fire();
+				Fire( '   =>'+markersArray[index].getTitle());
 			});
 		}
 	})
