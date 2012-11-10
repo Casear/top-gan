@@ -7,7 +7,7 @@ socket.on('connect', function() {
 
     socket.on('init', function(data) {
 		console.log('socket.on init, data:' + data);
-		user = { n:"user", x:25.139636, y:121.495840, r:0 };
+		user = { name:data.name, x:data.x, y:data.y, r:data.r };
 	    initialize_map();
 	});
 
@@ -23,24 +23,27 @@ socket.on('connect', function() {
 
 function join(name, country, aircraft) {
 	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
-	socket.emit('join', { n: name, c: country, t: aircraft });
+	socket.emit('join', { name: name, country: country, type: aircraft });
 }
 
 function fly(name, x, y, r) {
 	console.log('call socket.emit fly, name: ' + name + ', x:' + x + ', y:' + y + ', deg:' + r);
-	socket.emit('fly', { n: name, x: x, y: y, r: r });
+	socket.emit('fly', { name: name, x: x, y: y, r: r });
 }
 
 function rotate(name, x, y, r) {
 	deg += r;
 	console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
-	$('#map_canvas').find('>div>div>div:eq(0)>div').css({
-		'transform':'rotate(' + deg + 'deg)',
-    	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
-        '-moz-transform':'rotate(' + deg + 'deg)', /* Firefox */
-      	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
-      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
-	});
+	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
+	// 	'transform':'rotate(' + deg + 'deg)',
+ //    	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
+ //        '-moz-transform':'rotate(' + deg + 'deg)', /* Firefox */
+ //      	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
+ //      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
+	// });
+	// $('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
+	map.panDirection(-1,0);
+
 	var newlatlng = new google.maps.LatLng(x, y);
 	map.setCenter(newlatlng);
 	//socket.emit('rotate', { n:name, x: x, y: y, d: deg });
@@ -52,5 +55,8 @@ document.onkeydown =  function(evt) {
 	console.log(evt.keyCode);
 	var r = (evt.keyCode == 37) ? 10 : ((evt.keyCode == 39) ? -10 : 0); 
 
-	rotate(user.n, user.x, user.y, r);
+	if (user) {
+		rotate(user.name, user.x, user.y, r);
+	}
+
 }

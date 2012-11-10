@@ -38,10 +38,10 @@ module.exports = function(app) {
                     if(!res){
                         
                         var data = {
-                            id: airplane.name,
+                            name: airplane.name,
                             plane:airplane,
-                            x:25.139636,
-                            y:121.495840,
+                            x:25.0 + Math.random(),
+                            y:121.0 + Math.random(),
                             r:0,
                             loginTime: new Date()
                         };

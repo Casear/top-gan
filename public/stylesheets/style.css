@@ -20,4 +20,86 @@ a {
 }
 .start:hover {
   background-image: url("/images/start_P.png");
+<<<<<<< HEAD
+}
+.go {
+  width: 154px;
+  height: 50px;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-image: url("/images/go_N.png");
+}
+.go:hover {
+  background-image: url("/images/go_P.png");
+}
+.modal {
+  width: 300px;
+  margin: -250px 0 0 -150px;
+}
+.modal-T {
+  padding: 10px;
+  width: 290px;
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradient(#fff, #999);
+  background: -webkit-linear-gradient(#fff, #999);
+  background: -o-linear-gradient(#fff, #999);
+}
+.f1 {
+  width: 84px;
+  height: 84px;
+  margin: 5px;
+  float: left;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/f1_N.png");
+}
+.f1_s {
+  width: 84px;
+  height: 84px;
+  margin: 5px;
+  float: left;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/f1_P.png");
+}
+.f2 {
+  width: 84px;
+  height: 84px;
+  margin: 5px;
+  float: left;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/f2_N.png");
+}
+.f2_s {
+  width: 84px;
+  height: 84px;
+  margin: 5px;
+  float: left;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/f2_P.png");
+}
+.f3 {
+  width: 84px;
+  float: left;
+  margin: 5px;
+  height: 84px;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/f3_N.png");
+}
+.f3_s {
+  width: 84px;
+  float: left;
+  margin: 5px;
+  height: 84px;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/f3_P.png");
+=======
+>>>>>>> 7622dbd575e8ce002eaf00891136b4ee17107d18
 }
