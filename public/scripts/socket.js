@@ -52,13 +52,8 @@ socket.on('connect', function() {
 });
 
 function join(name, country, aircraft) {
-
-
-
-
-	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
+	//console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { name: name, country: country, type: aircraft , x:countries[country].x,y:countries[country].y });
-
 }
 
 function fly(name, x, y, r) {
@@ -83,6 +78,16 @@ function rotate(name, x, y, r) {
 	var newlatlng = new google.maps.LatLng(x, y);
 	map.setCenter(newlatlng);
 	//socket.emit('rotate', { n:name, x: x, y: y, d: deg });
+}
+
+function lock(name) {
+	//console.log('call socket.emit lock, name: ' + name );
+	socket.emit('lock', { name: name });
+}
+
+function attack(name) {
+	//console.log('call socket.emit attack, name: ' + name );
+	socket.emit('attack', { name: name });
 }
 
 document.onkeydown =  function(evt) {
