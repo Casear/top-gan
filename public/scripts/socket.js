@@ -30,7 +30,9 @@ function rotate(name, x, y, r) {
       	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
       	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
 	});
-	socket.emit('rotate', { n:name, x: x, y: y, d: deg });
+	var newlatlng = new google.maps.LatLng(x, y);
+	map.setCenter(newlatlng);
+	//socket.emit('rotate', { n:name, x: x, y: y, d: deg });
 }
 
 document.onkeydown =  function(evt) {
