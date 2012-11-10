@@ -22,6 +22,7 @@ socket.on('connect', function() {
 		socket.on('attacked', function(data) {
 			//console.log('socket.on attacked, data:' + data);
 			bomb();
+			audioPlay('exl');
 		});
 	});
     socket.on('fail',function(data){
@@ -50,6 +51,7 @@ function rotate(name, x, y, r) {
 	if (deg == 360 || deg == -360) {
 		deg = 0;
 	}
+	user.r = deg;
 	//console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
 	// 	'transform':'rotate(' + deg + 'deg)',
