@@ -20,6 +20,7 @@ a {
 }
 .start:hover {
   background-image: url("/images/start_P.png");
+<<<<<<< HEAD
 }
 .go {
   width: 154px;
@@ -99,4 +100,6 @@ a {
   display: block;
   background-repeat: no-repeat;
   background-image: url("/images/f3_P.png");
+=======
+>>>>>>> 7622dbd575e8ce002eaf00891136b4ee17107d18
 }
