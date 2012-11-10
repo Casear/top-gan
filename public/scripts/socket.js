@@ -34,13 +34,15 @@ function fly(name, x, y, r) {
 function rotate(name, x, y, r) {
 	deg += r;
 	console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
-	$('#map_canvas').find('>div>div>div:eq(0)>div').css({
-		'transform':'rotate(' + deg + 'deg)',
-    	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
-        '-moz-transform':'rotate(' + deg + 'deg)', /* Firefox */
-      	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
-      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
-	});
+	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
+	// 	'transform':'rotate(' + deg + 'deg)',
+ //    	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
+ //        '-moz-transform':'rotate(' + deg + 'deg)', /* Firefox */
+ //      	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
+ //      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
+	// });
+	$('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
+
 	var newlatlng = new google.maps.LatLng(x, y);
 	map.setCenter(newlatlng);
 	//socket.emit('rotate', { n:name, x: x, y: y, d: deg });
@@ -52,5 +54,8 @@ document.onkeydown =  function(evt) {
 	console.log(evt.keyCode);
 	var r = (evt.keyCode == 37) ? 10 : ((evt.keyCode == 39) ? -10 : 0); 
 
-	rotate(user.n, user.x, user.y, r);
+	if (user) {
+		rotate(user.name, user.x, user.y, r);
+	}
+
 }
