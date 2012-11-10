@@ -34,7 +34,7 @@ socket.on('connect', function() {
     socket.on('init', function(data) {
         $('#loginScreen').hide();
         console.log('socket.on init, data:' + data);
-		user = { name:data.name, x:data.x, y:data.y, r:data.r };
+		user = { name:data.name, x:data.x, y:data.y, r:data.r, plant:data.plant };
 	    initialize_map();
 	});
     socket.on('fail',function(data){
