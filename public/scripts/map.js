@@ -16,6 +16,8 @@ function initialize_map() {
 		map.setCenter(newlatlng);
 		setMarker([{"n":"n","x":newlatlng.lat(),"y":newlatlng.lng() }]);
 		fly(map.center.lat() , map.center.lng())
+		user.x = newlatlng.lat();
+		user.y = newlatlng.lng();
 		},250);
 
 	// setMarker([{"n":"n","x":34.3,"y":150.6}]);
@@ -32,7 +34,7 @@ function setMarker (json)
 						null, // size
 						null, // origin
 						new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-						new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
+						new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
 					);
 		markersArray[i] = new google.maps.Marker({
 						flat: true,
