@@ -5,6 +5,7 @@ socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
     user = { n:"user", x:25.139636, y:121.495840, r:0 };
+    initialize_map();
 });
 socket.on('disconnect', function() {
     console.log('The client has disconnected!');
