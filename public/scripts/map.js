@@ -13,13 +13,13 @@ function initialize_map() {
 	    myOptions);
 
 	self.setInterval(function(){
-		var newlat = user.x + 0.1 ;
-		var newlng = user.y;
+		var newlat = user.x  ;
+		var newlng = user.y + 0.1;
 			if(newlat > 45)
 				newlat = newlat - 90 ;
 		user.x = newlat;
 		user.y = newlng;
-		fly(user.n , user.x , user.y , user.r);
+		fly(user.name , user.x , user.y , user.r);
 		},600);
 }
 var selMarker ;
@@ -30,44 +30,58 @@ function setMarker (json)
 	clearOverlays();
 	$.each(json, function(i,v)
 	{
-		$.each(markersArray,function(j,w){
-
-		} )
-		var myLatLng = new google.maps.LatLng( v.x, v.y);
-		var image = new google.maps.MarkerImage(
+		var IsExist = 0;
+		var newLatLng = new google.maps.LatLng( v.x, v.y);
+		
+		$.each(markersArray, function(j,value)
+		{
+			alert(value.title);
+			if(v.name == value.getTitle())
+			{
+				
+				value.setPosition(newLatLng);
+				IsExist = 1;
+			}
+		})
+		if(IsExist == 0)
+		{
+			console.log(v.name + " & " + markersArray.length);
+			var image = new google.maps.MarkerImage(
 						'images/F35-JSF-48px.png',
 						null, // size
 						null, // origin
 						new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-						new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
+						new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
 					);
-		markersArray[i] = new google.maps.Marker({
+			markersArray[markersArray.length] = new google.maps.Marker({
 						flat: true,
 						icon: image,
 						map: map,
 						optimized: false,
-						position: myLatLng,
-						title: v.n,
+						position: newLatLng,
+						title: v.name,
 						visible: true
 					});
-		google.maps.event.addListener(markersArray[i], 'mouseover', function() {
-			var image = new google.maps.MarkerImage(
-						'images/Fighter.jpg',
-						null, // size
-						null, // origin
-						new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-						new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
-					);
-    		selMarker = new google.maps.Marker({
-						flat: true,
-						icon: image,
-						map: map,
-						optimized: false,
-						position: markersArray[i].position,
-						title: v.n,
-						visible: true
-					});
-  		});
+		}
+			// google.maps.event.addListener(markersArray[i], 'mouseover', function() {
+			// 	var image = new google.maps.MarkerImage(
+			// 			'images/Fighter.jpg',
+			// 			null, // size
+			// 			null, // origin
+			// 			new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+			// 			new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
+			// 		);
+   //  			selMarker = new google.maps.Marker({
+			// 			flat: true,
+			// 			icon: image,
+			// 			map: map,
+			// 			optimized: false,
+			// 			position: markersArray[i].position,
+			// 			title: v.name,
+			// 			visible: true
+			// 		});
+  	// 		});
+  		
 	})
 }
 function clearOverlays() {
