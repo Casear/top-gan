@@ -17,7 +17,7 @@ socket.on('war', function(data) {
 
 function fly(x, y, r) {
 	console.log('call socket.emit fly, x:' + x + ', y:' + y + ', deg:' + r);
-	socket.emit('fly', { x: x, y: y, r: deg });
+	socket.emit('fly', { x: x, y: y, r: r });
 }
 
 function rotate(name, x, y, r) {
