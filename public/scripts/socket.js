@@ -8,6 +8,21 @@ socket.on('connect', function() {
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
 	    initialize_map();
+
+	    socket.on('war', function(data) {
+			//console.log('socket.on war, data:' + data);
+			setMarker(data);
+		});
+
+		socket.on('locked', function(data) {
+			//console.log('socket.on locked, data:' + data);
+			audioPlay('lock');
+		});
+
+		socket.on('attacked', function(data) {
+			//console.log('socket.on attacked, data:' + data);
+			bomb();
+		});
 	});
     socket.on('fail',function(data){
         console.log('user exsit');
@@ -17,10 +32,7 @@ socket.on('connect', function() {
 		//console.log('socket.on system, data:' + data.msg);
 	});
 
-	socket.on('war', function(data) {
-		//console.log('socket.on war, data:' + data);
-		setMarker(data);
-	});
+	
 });
 
 function join(name, country, aircraft) {
@@ -35,6 +47,9 @@ function fly(name, x, y, r) {
 
 function rotate(name, x, y, r) {
 	deg += r;
+	if (deg == 360 || deg == -360) {
+		deg = 0;
+	}
 	//console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
 	// 	'transform':'rotate(' + deg + 'deg)',
@@ -54,12 +69,18 @@ function rotate(name, x, y, r) {
 
 function lock(name) {
 	//console.log('call socket.emit lock, name: ' + name );
+	audioPlay('warning');
 	socket.emit('lock', { name: name });
 }
 
 function attack(name) {
 	//console.log('call socket.emit attack, name: ' + name );
 	socket.emit('attack', { name: name });
+}
+
+function audioPlay(name) {
+	var obj = document.getElementById(name);
+	obj.play();
 }
 
 document.onkeydown =  function(evt) {
