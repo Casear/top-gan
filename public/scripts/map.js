@@ -20,7 +20,7 @@ function setMarker (json)
 	}
 	for(int i=0 ; i < json.length ; i++)
 	{
-		var myLatLng = new google.maps.LatLng( json[i].l.x, json[i].l.y);
+		var myLatLng = new google.maps.LatLng( json[i].x, json[i].y);
 		var image = new google.maps.MarkerImage(
 						'bluedot_retina.png',
 						null, // size
