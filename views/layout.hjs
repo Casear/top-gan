@@ -42,7 +42,7 @@
             <source src="/musics/background.ogg">
         </audio>
     {{> head}} {{{ yield }}}</body>
-    </body>
+    
 
 
 </html>

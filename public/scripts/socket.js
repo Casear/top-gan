@@ -42,11 +42,11 @@ socket.on('connect', function() {
         $('#msg').text('Account already exist');
     });
 	socket.on('system', function(data) {
-		console.log('socket.on system, data:' + data.msg);
+		//console.log('socket.on system, data:' + data.msg);
 	});
 
 	socket.on('war', function(data) {
-		console.log('socket.on war, data:' + data);
+		//console.log('socket.on war, data:' + data);
 		setMarker(data);
 	});
 });
@@ -68,7 +68,7 @@ function fly(name, x, y, r) {
 
 function rotate(name, x, y, r) {
 	deg += r;
-	console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
+	//console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
 	// 	'transform':'rotate(' + deg + 'deg)',
  //    	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
