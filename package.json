@@ -22,5 +22,8 @@
 	"engines": {
 		"node": "0.8.x"
 	},
-	"subdomain": "top-gan.nko3"
+	"subdomain": "top-gan.nko3",
+    "domains":[
+        "www.topgan.tw"
+        ]
 }
