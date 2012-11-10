@@ -41,7 +41,8 @@ function rotate(name, x, y, r) {
  //      	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
  //      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
 	// });
-	$('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
+	// $('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
+	map.panDirection(-1,0);
 
 	var newlatlng = new google.maps.LatLng(x, y);
 	map.setCenter(newlatlng);
