@@ -14,23 +14,19 @@ function initialize_map() {
 
 	self.setInterval(function(){
 		var newlat = user.x + 0.1 ;
-		var newlng = user.y ;
+		var newlng = user.y;
 			if(newlat > 45)
 				newlat = newlat - 90 ;
-		var newlatlng = new google.maps.LatLng( newlat , newlng );
-		
-
-		map.setCenter(newlatlng);
-		//setMarker([{n:"n",x:newlatlng.lat(),y:newlatlng.lng() }]);
-		
-		user.x = newlatlng.lat();
-		user.y = newlatlng.lng();
+		user.x = newlat;
+		user.y = newlng;
 		fly(user.n , user.x , user.y , user.r);
 		},600);
 }
 var selMarker ;
 function setMarker (json)
 {
+	var newlatlng = new google.maps.LatLng( user.x , user.y );
+	map.setCenter(newlatlng);
 	clearOverlays();
 	$.each(json, function(i,v)
 	{
