@@ -18,24 +18,5 @@ function setMarker (json)
 	//		markersArray[i].setMap(null);
 	//	}
 	//}
-	for(int i=0 ; i < json.length ; i++)
-	{
-		var myLatLng = new google.maps.LatLng( json[i].x, json[i].y);
-		var image = new google.maps.MarkerImage(
-						'bluedot_retina.png',
-						null, // size
-						null, // origin
-						new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-						new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
-					);
-		markersArray[i] = new google.maps.Marker({
-						flat: true,
-						icon: image,
-						map: map,
-						optimized: false,
-						position: myLatLng,
-						title: 'I might be here',
-						visible: true
-					});
-	}
+	
 }
