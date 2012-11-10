@@ -38,10 +38,9 @@
     </head>
     
     <body>
-        <!--<audio id="background" autoplay preload loop>
+        <audio id="background" autoplay preload loop>
             <source src="/musics/background.ogg">
-
-        </audio>-->
+        </audio>
     {{> head}} {{{ yield }}}</body>
     </body>
 

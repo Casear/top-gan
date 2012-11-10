@@ -21,6 +21,10 @@ module.exports = function(app) {
 		}));
 	});
 
+        function randomFromTo(from, to){
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
         var getAirplanes = function(action){
             var data = [];
             store.hgetall("airplanes",function(err,obj){
@@ -31,36 +35,40 @@ module.exports = function(app) {
             });
         };
 
+        
+
 	io.sockets.on('connection', function(socket) {
             socket.on('join', function(airplane) {
+                if(!airplane.name){
+                    io.sockets.emit('error',{msg:"empty user name!!"});
+                    return;
+                }
+
                 store.hexists('airplanes',airplane.name,function(err,res){
-                    console.log(res);
                     if(!res){
+                        var x = airplane.x || 25.0,
+                            y = airplane.y || 121.0;
                         
                         var data = {
                             name: airplane.name,
-                            plane:airplane,
-                            x:25.0 + Math.random(),
-                            y:121.0 + Math.random(),
-                            r:0,
+                            plane: airplane,
+                            x: x + Math.random(),
+                            y: y + Math.random(),
+                            r: randomFromTo(0,36)*10,
                             loginTime: new Date()
                         };
-
-                        socket.emit('init',data);
-                        io.sockets.emit('system', {msg: airplane.name + " joins the game. "});
 
                         socket.set('name',airplane.name,function(){
                         
                             store.hset('airplanes',airplane.name,JSON.stringify(data),function(){
-                                getAirplanes(function(planes){
-                                    socket.emit('war',planes);
-                                });
-                            
+                                io.sockets.emit('system', {msg: airplane.name + " joins the game. "});
+                                socket.broadcast.emit('war',data);
+                                socket.emit('init',data);
                             });
                         });
                     }
                     else{
-                        socket.emit('system',{msg:'user name exist!!'});
+                        socket.emit('error',{msg:'user name exist!!'});
                     }
                 });
 
@@ -75,24 +83,23 @@ module.exports = function(app) {
             });
 
             socket.on('fly', function(plane) {
-                
+               console.log(plane.name); 
                 store.hget('airplanes',plane.name,function(err,res){
+                    if(!res){
+                        socket.emit('error',{msg:'error, can not find airplane'});
+                        return;
+                    }
                     var aPlane = JSON.parse(res);
 
                     aPlane.x = plane.x;
                     aPlane.y = plane.y;
                     aPlane.r = plane.r;
-            
                     store.hset('airplanes',plane.name,JSON.stringify(aPlane),function(){
-                        getAirplanes(function(planes){
-                            socket.emit('war',planes);
-                        });
-                    
+                        socket.broadcast.emit('war',aPlane); 
                     });
                 });
             });
-	});
+        });
 
 	return io;
 };
-
