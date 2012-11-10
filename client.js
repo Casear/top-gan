@@ -20,6 +20,7 @@ socket.on('connect',function(){
 
     socket.on('war',function(data){
         console.log(data);
+        socket.emit('fly',{name:name,x:10,y:10,r:10});
     });
 });
 

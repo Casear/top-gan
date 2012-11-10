@@ -33,26 +33,35 @@ module.exports = function(app) {
 
 	io.sockets.on('connection', function(socket) {
             socket.on('join', function(airplane) {
+                store.hexists('airplanes',airplane.name,function(err,res){
+                    console.log(res);
+                    if(!res){
+                        
+                        var data = {
+                            id: airplane.name,
+                            plane:airplane,
+                            x:25.139636,
+                            y:121.495840,
+                            r:0,
+                            loginTime: new Date()
+                        };
 
-                var data = {
-                    id: airplane.name,
-                    plane:airplane,
-                    x:40,
-                    y:40,
-                    loginTime: new Date()
-                };
-                socket.set('name',airplane.name,function(){
-                
-                    store.hset('airplanes',airplane.name,JSON.stringify(data),function(){
-                    
-                        var msg = airplane.name + " joins the game.";
+                        socket.emit('init',data);
+                        io.sockets.emit('system', {msg: airplane.name + " joins the game. "});
 
-                        io.sockets.emit('system', {msg:msg});
-                        getAirplanes(function(planes){
-                            socket.emit('war',planes);
+                        socket.set('name',airplane.name,function(){
+                        
+                            store.hset('airplanes',airplane.name,JSON.stringify(data),function(){
+                                getAirplanes(function(planes){
+                                    socket.emit('war',planes);
+                                });
+                            
+                            });
                         });
-                    
-                    });
+                    }
+                    else{
+                        socket.emit('system',{msg:'user name exist!!'});
+                    }
                 });
 
             });
@@ -65,17 +74,22 @@ module.exports = function(app) {
                 });
             });
 
-            socket.on('fly', function(location) {
+            socket.on('fly', function(plane) {
+                
+                store.hget('airplanes',plane.name,function(err,res){
+                    var aPlane = JSON.parse(res);
 
-                socket.emit('war',buffer);
-                    socket.get('airplane', function(err, airplane) {
-                        airplane.x = location.x;
-                        airplane.y = location.y;
-
-                        socket.set('airplane',airplane,function(){
-                            socket.broadcast.emit('msg', data);
+                    aPlane.x = plane.x;
+                    aPlane.y = plane.y;
+                    aPlane.r = plane.r;
+            
+                    store.hset('airplanes',plane.name,JSON.stringify(aPlane),function(){
+                        getAirplanes(function(planes){
+                            socket.emit('war',planes);
                         });
+                    
                     });
+                });
             });
 	});
 

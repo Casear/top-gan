@@ -4,26 +4,26 @@ var deg = 0;
 socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
-});
-socket.on('disconnect', function() {
-    console.log('The client has disconnected!');
-});
 
-socket.on('war', function(data) {
-	console.log('socket.on war, data:' + data);
-	setMarker(data);
-});
+    socket.on('init', function(data) {
+		console.log('socket.on init, data:' + data);
+		user = { n:"user", x:25.139636, y:121.495840, r:0 };
+	    initialize_map();
+	});
 
-socket.on('system', function(data) {
-	console.log('socket.on system, data:' + data.msg);
+	socket.on('system', function(data) {
+		console.log('socket.on system, data:' + data.msg);
+	});
+
+	socket.on('war', function(data) {
+		console.log('socket.on war, data:' + data);
+		setMarker(data);
+	});
 });
 
 function join(name, country, aircraft) {
 	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { n: name, c: country, t: aircraft });
-
-	user = { n:"user", x:25.139636, y:121.495840, r:0 };
-    initialize_map();
 }
 
 function fly(name, x, y, r) {
