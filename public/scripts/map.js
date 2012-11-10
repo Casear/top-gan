@@ -89,8 +89,6 @@ function initialize_map() {
 }
 function Fire ()
 {
-	
-	//Fire the Missile
 	alert('Fire the Missile');
 }
 function PlaneRotation()
