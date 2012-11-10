@@ -14,7 +14,6 @@
 		"express": "3.0.2",
 		"hogan-express": "*",
 		"redis": "*",
-		"hiredis": "*"
 		"socket.io": "*",
 		"connect-redis": "*",
 		"hjs": "*",

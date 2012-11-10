@@ -45,7 +45,6 @@ module.exports = function(app) {
                 }
 
                 store.hexists('airplanes',airplane.name,function(err,res){
-                    console.log(res);
                     if(!res){
                         var x = airplane.x || 25.0,
                             y = airplane.y || 121.0;
@@ -61,10 +60,11 @@ module.exports = function(app) {
 
                         socket.set('name',airplane.name,function(){
                         
-                            store.hset('airplanes',airplane.name,JSON.stringify(data));
-                            socket.emit('init',data);
-                            io.sockets.emit('system', {msg: airplane.name + " joins the game. "});
-                            socket.broadcast.emit('war',data);
+                            store.hset('airplanes',airplane.name,JSON.stringify(data),function(){
+                                io.sockets.emit('system', {msg: airplane.name + " joins the game. "});
+                                socket.broadcast.emit('war',data);
+                                socket.emit('init',data);
+                            });
                         });
                     }
                     else{
@@ -83,20 +83,19 @@ module.exports = function(app) {
             });
 
             socket.on('fly', function(plane) {
-                
+               console.log(plane.name); 
                 store.hget('airplanes',plane.name,function(err,res){
-                    if(err){
-                        socket.emit('system',{msg:'error, can not find airplane'});
+                    if(!res){
+                        socket.emit('error',{msg:'error, can not find airplane'});
                         return;
                     }
-                    
                     var aPlane = JSON.parse(res);
 
                     aPlane.x = plane.x;
                     aPlane.y = plane.y;
                     aPlane.r = plane.r;
                     store.hset('airplanes',plane.name,JSON.stringify(aPlane),function(){
-                        socket.boardcast.emit('war',aPlane); 
+                        socket.broadcast.emit('war',aPlane); 
                     });
                 });
             });

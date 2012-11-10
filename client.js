@@ -17,11 +17,18 @@ socket.on('connect',function(){
         console.log(data.msg); 
 
     });
-
+    socket.on('error',function(data){
+        console.log(data);
+    });
+    socket.on('init',function(data){
+        console.log(data);
+    });
     socket.on('war',function(data){
         console.log(data);
-        socket.emit('fly',{name:name,x:10,y:10,r:10});
     });
+
+    socket.emit('fly',{name:name,x:10,y:10,r:10});
+    
 });
 
 
