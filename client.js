@@ -3,7 +3,8 @@ var io = require('socket.io-client')
     , host = 'http://localhost'
     , socket = io.connect(host + ':' + port);
     
-var name = process.argv[2];
+var name = process.argv[2],
+    target = process.argv[3];
 
 var plane = {
     name:name,
@@ -22,13 +23,19 @@ socket.on('connect',function(){
     });
     socket.on('init',function(data){
         console.log(data);
+        socket.emit('fly',{name:name,x:10,y:10,r:10});
     });
     socket.on('war',function(data){
         console.log(data);
     });
 
-    socket.emit('fly',{name:name,x:10,y:10,r:10});
-    
+    socket.on('locked',function(){
+        console.log('be locked');
+    });
+
+    if(target){
+        socket.emit('lock',target); 
+    }
 });
 
 
