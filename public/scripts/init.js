@@ -1,3 +1,3 @@
 window.onload = function() {
-	initialize();
+	initialize_map();
 }
