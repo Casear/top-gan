@@ -27,6 +27,9 @@
         <link rel='stylesheet' href='/stylesheets/style.css'>
         <script type="text/javascript" src="/scripts/socket.js"></script>
         <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+       
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
+
         <script type="text/javascript" src="/scripts/citymap.js"></script>
         <script type="text/javascript" src="/scripts/map.js"></script>
         <script type="text/javascript" src="/scripts/init.js"></script>

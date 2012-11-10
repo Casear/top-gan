@@ -91,13 +91,13 @@
 <div id="map_canvas" style="width:100%; height:100%"></div> 
 
 <audio src="/musics/fly.mp3" preload loop  ></audio>
-<audio>
+<audio id='warning'>
     <source src="/musics/warning.mp3">
 </audio>
-<audio>
+<audio id='expl'>
     <source src="/musics/expl.mp3">
 </audio>
-<audio> 
+<audio id='lock'> 
     <source src="/musics/lock.mp3">
 </audio>
 

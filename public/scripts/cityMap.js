@@ -1,5 +1,6 @@
 function createCityMap(map) {
-	var query = "SELECT Lat,Long,City,Country FROM 2621505 WHERE Megacity=1";
+    google.load('visualization', '1');
+    var query = "SELECT Lat,Long,City,Country FROM 2621505 WHERE Megacity=1";
 	query = encodeURIComponent(query);
 	var gvizQuery = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + query);
 
