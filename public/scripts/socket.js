@@ -4,11 +4,7 @@ var deg = 0;
 socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
-    // user = { n:"user", x:25.139636, y:121.495840, r:0 };
-    // initialize_map();
 });
-
-
 socket.on('disconnect', function() {
     console.log('The client has disconnected!');
 });
@@ -19,19 +15,20 @@ socket.on('war', function(data) {
 });
 
 socket.on('system', function(data) {
-	console.log('socket.on system, data:' + data);
-	user = { n:"user", x:25.139636, y:121.495840, r:0 };
-    initialize_map();
+	console.log('socket.on system, data:' + data.msg);
 });
 
 function join(name, country, aircraft) {
 	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { n: name, c: country, t: aircraft });
+
+	user = { n:"user", x:25.139636, y:121.495840, r:0 };
+    initialize_map();
 }
 
-function fly(x, y, r) {
-	console.log('call socket.emit fly, x:' + x + ', y:' + y + ', deg:' + r);
-	socket.emit('fly', { x: x, y: y, r: r });
+function fly(name, x, y, r) {
+	console.log('call socket.emit fly, name: ' + name + ', x:' + x + ', y:' + y + ', deg:' + r);
+	socket.emit('fly', { n: name, x: x, y: y, r: r });
 }
 
 function rotate(name, x, y, r) {
