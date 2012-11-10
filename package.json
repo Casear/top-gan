@@ -27,6 +27,7 @@
 	},
 	"subdomain": "top-gan.nko3",
 	"domains": [
-		"www.topgan.tw"
+		"topgan.tw",
+        "www.topgan.tw"
 	]
 }

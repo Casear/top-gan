@@ -1,23 +1,25 @@
 var map;
 var markersArray = [];
-var selMarker ;
-var myPlane ;
+var selMarker;
+var myPlane;
 var increX = increY = 0;
+
 function initialize_map() {
 	console.log("initialize_map");
 	var latlng = new google.maps.LatLng(user.x, user.y);
 	console.log(user.x + " & " + user.y);
 	var myOptions = {
-	  zoom: 8,
-	  center: latlng,
-	  disableDefaultUI: true,
-	  scrollwheel: false,
-	  navigationControl: false,
-	  mapTypeControl: false,
-	  scaleControl: false,
-	  draggable: false,
-	  mapTypeId: google.maps.MapTypeId.SATELLITE
+		zoom: 8,
+		center: latlng,
+		disableDefaultUI: true,
+		scrollwheel: false,
+		navigationControl: false,
+		mapTypeControl: false,
+		scaleControl: false,
+		draggable: false,
+		mapTypeId: google.maps.MapTypeId.SATELLITE
 	};
+	
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 	    myOptions);
 	//My plane
@@ -31,6 +33,7 @@ function initialize_map() {
 			new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
 			new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
 		);
+
 	myPlane = new google.maps.Marker({
 		flat: true,
 		icon: myimage,
@@ -38,29 +41,21 @@ function initialize_map() {
 		optimized: false,
 		position: new google.maps.LatLng(user.x, user.y),
 		visible: true
-		});
-	window.setInterval(function(){
-		
+	});
+
+    createCityMap(map);        
+            
+        
+
+
+	window.setInterval(function() {
+
 		var newlat = user.x + 0.1 + increX;
 		var newlng = user.y + increY;
-
-    var layer= new google.maps.FusionTablesLayer({
-        query:{
-            select:'Lat,Long',
-            from : '2621505',
-            where: 'Megacity=1'
-        }
-    });
-    layer.setMap(map);
-	self.setInterval(function(){
-		var newlat = user.x  ;
-		var newlng = user.y + 0.03;
-
-			if(newlat > 45)
-				newlat = newlat - 90 ;
+		if (newlat > 45) newlat = newlat - 90;
 		user.x = newlat;
 		user.y = newlng;
-		fly(user.name , user.x , user.y , user.r);
+		fly(user.name, user.x, user.y, user.r);
 		myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
 		map.setCenter(new google.maps.LatLng(user.x, user.y));
 		},300);
@@ -89,13 +84,22 @@ function initialize_map() {
 }
 function Fire ()
 {
+<<<<<<< HEAD
+=======
+	
+
+	//Fire the Missile
+>>>>>>> a58811c740776376fe509f8b74440146e6d73776
 	alert('Fire the Missile');
 }
-function PlaneRotation()
-{
+
+function PlaneRotation() {
 	//sin 10 = 0.173648178
 	//cos 10 = 0.984807753
 }
+
+
+
 function setMarker (json)
 {
 	if(user != null)
@@ -152,4 +156,5 @@ function setMarker (json)
 		
 		
 	}
+
 }
