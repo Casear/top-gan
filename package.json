@@ -1,19 +1,26 @@
 {
-  "name": "nko3-top-gan",
-  "version": "0.0.0",
-  "description": "Top Gan",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:nko3/top-gan.git"
-  },
-  "dependencies": {
-  },
-  "engines": {
-    "node": "0.8.x"
-  },
-  "subdomain": "top-gan.nko3"
+	"name": "nko3-top-gan",
+	"version": "0.0.0",
+	"description": "Top Gan",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:nko3/top-gan.git"
+	},
+	"dependencies": {
+		"express": "3.0.2",
+		"hogan-express": "*",
+		"redis": "*",
+		"socket.io": "*",
+		"connect-redis": "*",
+		"hjs": "*",
+		"stylus": "*"
+	},
+	"engines": {
+		"node": "0.8.x"
+	},
+	"subdomain": "top-gan.nko3"
 }
