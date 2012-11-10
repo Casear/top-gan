@@ -21,6 +21,7 @@ function initialize_map() {
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 	    myOptions);
 
+
 	var myimage = new google.maps.MarkerImage(
 			'images/Fighter.jpg',
 			null, // size
@@ -40,6 +41,19 @@ function initialize_map() {
 		
 		var newlat = user.x + 0.1 + increX;
 		var newlng = user.y + increY;
+
+    var layer= new google.maps.FusionTablesLayer({
+        query:{
+            select:'Lat,Long',
+            from : '2621505',
+            where: 'Megacity=1'
+        }
+    });
+    layer.setMap(map);
+	self.setInterval(function(){
+		var newlat = user.x  ;
+		var newlng = user.y + 0.03;
+
 			if(newlat > 45)
 				newlat = newlat - 90 ;
 		user.x = newlat;
