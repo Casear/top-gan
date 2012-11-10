@@ -4,8 +4,8 @@ module.exports = function(app) {
 	RedisStore = require('socket.io/lib/stores/redis'),
 	port = null,
 	ip = null
-	//, port = 6379
-        //, ip = "106.186.16.33"
+	, port = 6379
+        , ip = "106.186.16.33"
 	, store = redis.createClient(port,ip)
 	, pub = redis.createClient(port, ip),
 	sub = redis.createClient(port, ip),
@@ -100,6 +100,12 @@ module.exports = function(app) {
                     console.log(data.id);
                     io.sockets.socket(data.id).emit('locked');
                 });
+            });
+
+            socket.on('attack',function(name){
+                var bom = {};
+
+                io.sockets.on('war',bom);
             });
 
             socket.on('fly', function(plane) {
