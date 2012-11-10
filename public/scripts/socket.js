@@ -1,9 +1,4 @@
-var location = function(name, x, y){
-	this.n = name;
-	this.x = x;
-	this.y = y;
-}
-var user = new location("", 0, 0);
+var user;
 
 socket = io.connect();
 socket.on('connect', function() {
