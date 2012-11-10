@@ -15,8 +15,8 @@ socket.on('connect', function() {
 		});
 
 		socket.on('locked', function(data) {
-			//console.log('socket.on locked, data:' + data);
-			audioPlay('lock');
+			console.log('socket.on locked, data:' + data);
+			audioPlay('waring');
 		});
 
 		socket.on('attacked', function(data) {
@@ -69,7 +69,7 @@ function rotate(name, x, y, r) {
 
 function lock(name) {
 	//console.log('call socket.emit lock, name: ' + name );
-	audioPlay('warning');
+	audioPlay('lock');
 	socket.emit('lock', { name: name });
 }
 
