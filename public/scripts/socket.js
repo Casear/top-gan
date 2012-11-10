@@ -7,7 +7,7 @@ socket.on('connect', function() {
 
     socket.on('init', function(data) {
 		console.log('socket.on init, data:' + data);
-		user = { n:"user", x:25.139636, y:121.495840, r:0 };
+		user = { name:data.name, x:data.x, y:data.y, r:data.r };
 	    initialize_map();
 	});
 
@@ -23,12 +23,12 @@ socket.on('connect', function() {
 
 function join(name, country, aircraft) {
 	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
-	socket.emit('join', { n: name, c: country, t: aircraft });
+	socket.emit('join', { name: name, country: country, type: aircraft });
 }
 
 function fly(name, x, y, r) {
 	console.log('call socket.emit fly, name: ' + name + ', x:' + x + ', y:' + y + ', deg:' + r);
-	socket.emit('fly', { n: name, x: x, y: y, r: r });
+	socket.emit('fly', { name: name, x: x, y: y, r: r });
 }
 
 function rotate(name, x, y, r) {
