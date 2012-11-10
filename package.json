@@ -1,6 +1,6 @@
 {
 	"name": "nko3-top-gan",
-	"version": "0.0.0-1",
+	"version": "0.0.0-4",
 	"description": "Top Gan",
 	"main": "server.js",
 	"scripts": {
@@ -10,6 +10,9 @@
 		"type": "git",
 		"url": "git@github.com:nko3/top-gan.git"
 	},
+	"bundledDependencies": [
+		"redis"
+	],
 	"dependencies": {
 		"express": "3.0.2",
 		"hogan-express": "*",

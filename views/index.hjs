@@ -1,5 +1,88 @@
-<div class='logo'>
-    <img src='/images/logo.png'/>
-    <img src='/images/image.jpg'/>
-    <div class='start' ></div>
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+            var flightType='';
+            $('.country').click(function(){
+                $('#lb').html($(this).text()+'<span class="caret"></span>');   
+                });
+            $('.dropdown-toggle').dropdown(); 
+            $('.start').click(function(){
+                $('#modalDialog').modal({
+                    keyboard: false,
+                    backdrop:false
+                    });
+                });
+            $('#f1').click(function(){
+                    flightType='f1';
+                    $('#f2').attr('class','f2');
+                    $('#f3').attr('class','f3');
+                    $(this).attr('class','f1_s');
+                });
+            $('#f2').click(function(){
+                    flightType='f2';
+                    $('#f1').attr('class','f1');
+                    $('#f3').attr('class','f3');
+                    $(this).attr('class','f2_s');
+                });
+            $('#f3').click(function(){
+                    flightType='f3';
+                    $('#f2').attr('class','f2');
+                    $('#f1').attr('class','f1');
+                    $(this).attr('class','f3_s');
+                    });
+            $('.go').click(function(){
+                    var a=$('#tbAccount');
+                    if($.trim(a.val())==''){
+                        $('#msg').removeClass('hide').text('Please input account Name');                        
+                        return;
+                        }
+                    var b=$('#lb');
+                    if(b.text()=='Country'){
+                        $('#msg').removeClass('hide').text('Please choose a country');
+                        return;
+                    }
+                    if(flightType==''){
+                        
+                        $('#msg').removeClass('hide').text('Please choose a flight type');
+                        return;
+                    
+                        }
+
+                        join($.trim(a.val()),b.text(),flightType);
+                    });
+    });      
+</script>
+<div id='loginScreen'>
+    <div class='logo'>
+        <img src='/images/logo.png'/>
+        <img src='/images/image.jpg'/>
+        <div class='start'  ></div>
+    </div>
+    <div  id="modalDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+        <div class='modal-T' >
+            <div class='logoFont' >Account</div> 
+            <div><input id='tbAccount' type='text'></input></div> 
+            <div class="btn-group">
+                <a id='lb' class='btn dropdown-toggle' data-toggle="dropdown" href='#'>Country<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a class='country' href='#'>USA</a></li>
+                    <li><a  class='country'  href='#'>China</a></li>
+                    <li><a  class='country'  href='#'>Taiwan</a></li>
+                    <li><a  class='country' href='#'>Korea</a></li>
+                    <li><a  class='country' href='#'>India</a></li>
+                    <li><a  class='country' href='#'>European Union</a></li>
+                </ul>
+            </div>
+            <br/><br/>
+            <div class='logofont'>Select fighter</div>
+            <div>
+                <div id='f1' class='f1' ></div>
+                <div id='f2' class='f2' ></div>
+                <div id='f3' class='f3' ></div>
+            </div>
+            <div style='clear:both'></div>
+            <span class="label label-important hide" id='msg' ></span>
+            <div class='go'></div>
+        </div>
+    </div>
 </div>
+<div did="map_canvas" style="width:100%; height:100%"></div> 
