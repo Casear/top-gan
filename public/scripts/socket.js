@@ -22,12 +22,12 @@ socket.on('connect', function() {
 });
 
 function join(name, country, aircraft) {
-	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
+	//console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { name: name, country: country, type: aircraft });
 }
 
 function fly(name, x, y, r) {
-	console.log('call socket.emit fly, name: ' + name + ', x:' + x + ', y:' + y + ', deg:' + r);
+	//console.log('call socket.emit fly, name: ' + name + ', x:' + x + ', y:' + y + ', deg:' + r);
 	socket.emit('fly', { name: name, x: x, y: y, r: r });
 }
 
