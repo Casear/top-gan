@@ -13,7 +13,12 @@ socket.on('war', function(data) {
 	setMarker(data);
 });
 
-function fly() {
-	console.log('call socket.emit fly, x:' + user.x + ', y:' + user.y);
-	socket.emit('fly', { x: user.x, y: user.y });
+function fly(x, y) {
+	console.log('call socket.emit fly, x:' + x + ', y:' + y);
+	socket.emit('fly', { x: x, y: y });
+}
+
+function rotate(x, y, deg) {
+	console.log('call socket.emit rotate, x:' + x + ', y:' + y + ', d:' + deg);
+	socket.emit('rotate', { x: x, y: y, d: deg });
 }
