@@ -13,18 +13,19 @@ function initialize_map() {
 	    myOptions);
 
 	self.setInterval(function(){
-		var newlat = map.center.lat() + 0.1 ;
-		var newlng = map.center.lng() ;
+		var newlat = user.x + 0.1 ;
+		var newlng = user.y ;
 			if(newlat > 45)
 				newlat = newlat - 90 ;
 		var newlatlng = new google.maps.LatLng( newlat , newlng );
 		
 
 		map.setCenter(newlatlng);
-		setMarker([{n:"n",x:newlatlng.lat(),y:newlatlng.lng() }]);
-		fly(user.n , user.x , user.y , user.r);
+		//setMarker([{n:"n",x:newlatlng.lat(),y:newlatlng.lng() }]);
+		
 		user.x = newlatlng.lat();
 		user.y = newlatlng.lng();
+		fly(user.n , user.x , user.y , user.r);
 		},600);
 }
 var selMarker ;
@@ -33,6 +34,9 @@ function setMarker (json)
 	clearOverlays();
 	$.each(json, function(i,v)
 	{
+		$.each(markersArray,function(j,w){
+
+		} )
 		var myLatLng = new google.maps.LatLng( v.x, v.y);
 		var image = new google.maps.MarkerImage(
 						'images/F35-JSF-48px.png',
