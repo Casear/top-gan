@@ -12,12 +12,12 @@ var markersArray = [];
 
 function setMarker (json)
 {
-	if(markersArray.length > 0){
-		for(int i=0 ; i<markersArray.length ; i++) 
-		{
-			markersArray[i].setMap(null);
-		}
-	}
+	//if(markersArray.length > 0){
+	//	for(int i = 0 ; i < markersArray.length ; i++) 
+	//	{
+	//		markersArray[i].setMap(null);
+	//	}
+	//}
 	for(int i=0 ; i < json.length ; i++)
 	{
 		var myLatLng = new google.maps.LatLng( json[i].x, json[i].y);
