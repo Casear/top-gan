@@ -6,3 +6,18 @@ body {
 a {
   color: #00b7ff;
 }
+.logo img {
+  display: block;
+  margin: auto;
+}
+.start {
+  width: 225px;
+  height: 47px;
+  display: block;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-image: url("/images/start_n.png");
+}
+.start:hover {
+  background-image: url("/images/start_p.png");
+}
