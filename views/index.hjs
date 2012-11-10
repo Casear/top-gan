@@ -51,6 +51,8 @@
                     });
     });      
 </script>
+<iframe style='float:right' src="http://nodeknockout.com/iframe/top-gan" frameborder=0 scrolling=no allowtransparency=true width=115 height=25>
+</iframe>
 <div id='loginScreen'>
     <div class='logo'>
         <img src='/images/logo.png'/>

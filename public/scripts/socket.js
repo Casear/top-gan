@@ -1,32 +1,4 @@
-var user;
-var deg = 0;
-var countries={
-    "USA":{
-        x: 39.866745,
-        y: -98.051373
-    },
-    "Korea":{
-        x:36.204317,
-        y:127.868271
-    },
-    "China":{
-        x:33.819698,
-        y:102.890634
-    },
-    "India":{
-        x:20.349177,
-        y:78.676767
-    
-    },
-    "European Union":{
-        x:49.435569,
-        y:16.94459
-    },
-    "Taiwan":{
-        x:23.759624,
-        y:121.007089
-    }
-}
+
 socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
@@ -34,7 +6,7 @@ socket.on('connect', function() {
     socket.on('init', function(data) {
         $('#loginScreen').hide();
         console.log('socket.on init, data:' + data);
-		user = { name:data.name, x:data.x, y:data.y, r:data.r };
+		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
 	    initialize_map();
 	});
     socket.on('fail',function(data){
@@ -52,13 +24,8 @@ socket.on('connect', function() {
 });
 
 function join(name, country, aircraft) {
-
-
-
-
-	console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
+	//console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { name: name, country: country, type: aircraft , x:countries[country].x,y:countries[country].y });
-
 }
 
 function fly(name, x, y, r) {
@@ -83,6 +50,16 @@ function rotate(name, x, y, r) {
 	var newlatlng = new google.maps.LatLng(x, y);
 	map.setCenter(newlatlng);
 	//socket.emit('rotate', { n:name, x: x, y: y, d: deg });
+}
+
+function lock(name) {
+	//console.log('call socket.emit lock, name: ' + name );
+	socket.emit('lock', { name: name });
+}
+
+function attack(name) {
+	//console.log('call socket.emit attack, name: ' + name );
+	socket.emit('attack', { name: name });
 }
 
 document.onkeydown =  function(evt) {
