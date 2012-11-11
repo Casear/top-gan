@@ -6,6 +6,7 @@ socket.on('connect', function() {
 
     socket.on('init', function(rdata) {
         var data=rdata.data;
+        $('.users').removeClass('hide');
         $('#totalVal').text(rdata.userlist.length);
         for(var i=0;i<rdata.userlist.length;i++)
         {
@@ -40,8 +41,9 @@ socket.on('connect', function() {
             $('.users').append('<div id="list_'+data.plane.name+'" style="margin:3px"><img style="width:50px;height:25px" src="/images/'+countries[data.plane.country].flag+'">&nbsp;'+data.plane.name+'</div>');
     });
     socket.on('userleaved',function(data){
-        $('#list_'+data.name).remove();
-        $('#totalVal').text($('.users').children().length); 
+        $('#list_'+data).remove();
+        removeMarker(data)
+        $('#totalVal').text($('.users').children().length-1); 
     });
     socket.on('error',function(data){
         // console.log('user exsit');
