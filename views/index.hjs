@@ -156,7 +156,7 @@
        
     <div id='point' style='position: absolute;z-index:99999'>
         <img src='/images/redPoint.png'/>
-
+        </div>
     <div style='position: absolute;z-index:99999;width:237px;height:100'>
         <img src='/images/worldMap.png'/>
     </div>
