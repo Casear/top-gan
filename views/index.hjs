@@ -102,7 +102,7 @@
     <source src="/musics/missle.ogg">
 </audio>
 
-    <div class='users'>
+    <div class='users hide'>
         <div>Totlal:<span id='totalVal'></span></div>
         
     </div>
