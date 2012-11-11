@@ -96,6 +96,7 @@ function attacked(data, type) {
         if (Math.abs(user.y - loc.increY) < 0.2) {
             window.clearInterval(loc.attack);
             setBomb(user.x, user.y);
+            hitted(data);
         }
         if (loc.limited <= 0) {
             window.clearInterval(loc.attack);
@@ -121,7 +122,7 @@ function attacked(data, type) {
         loc.myshot.setPosition(new google.maps.LatLng(newlat, newlng));
         loc.increX = newlat;
         loc.increY = newlng;
-        // fly(user.name, user.x, user.y, user.r);
+        shooting({user.name, user.x, user.y, loc.target);
     }, 500);
 }
 
