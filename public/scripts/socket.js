@@ -8,6 +8,8 @@ socket.on('connect', function() {
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
 	    initialize_map();
+	    audioPlay('fly');
+	    audioStop('background');
 
 	    socket.on('war', function(data) {
 			//console.log('socket.on war, data:' + data);
@@ -74,6 +76,10 @@ function lock(name) {
 	audioPlay('lock');
 	socket.emit('lock', { name: name });
 }
+function unlock() {
+	//console.log('call socket.emit lock, name: ' + name );
+	audioStop('lock');
+}
 
 function attack(name) {
 	//console.log('call socket.emit attack, name: ' + name );
@@ -83,6 +89,12 @@ function attack(name) {
 function audioPlay(name) {
 	var obj = document.getElementById(name);
 	obj.play();
+}
+function audioStop(name) {
+	console.log('1');
+	var obj = document.getElementById(name);
+	console.log(obj.length);
+	obj.pause();
 }
 
 document.onkeydown =  function(evt) {
