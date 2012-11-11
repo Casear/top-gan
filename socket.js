@@ -109,6 +109,23 @@ module.exports = function(app) {
                 });
             });
 
+            socket.on('shoot',function(attackObj){
+                getAirplane(attackObj.target,function(data){
+                    io.sockets.socket(data.id).emit('attacked',attackObj);
+                });
+            });
+           
+            socket.on('shooting',function(bomb){
+                socket.broadcast.emit('war',bomb);
+            });
+
+            socket.on('hitted',function(attackObj){
+                socket.broadcast.emit('userleaved',attackObj.target);
+                getAirplane(attackObj.name,function(data){
+                    io.sockets.socket(data.id).emit('hit',attackObj);
+                });
+            });
+
             socket.on('fly', function(plane) {
                 getAirplane(plane.name,function(data){
                     data.x =plane.x;

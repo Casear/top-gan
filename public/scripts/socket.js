@@ -32,9 +32,12 @@ socket.on('connect', function() {
 
 		socket.on('attacked', function(data) {
 			//console.log('socket.on attacked, data:' + data);
-			// bomb();
-			// audioPlay('exl');
 			attacked(data);
+		});
+
+		socket.on('hit', function(data) {
+			//console.log('socket.on hit, data:' + data);
+			alert('you lose!');
 		});
 	});
     socket.on('userjoined',function(data){
@@ -71,13 +74,6 @@ function rotate(name, x, y, r) {
 	}
 	user.r = deg;
 	//console.log('call socket.emit rotate, name:' + name + ', x:' + x + ', y:' + y + ', deg:' + deg + ', r:' + r);
-	// $('#map_canvas').find('>div>div>div:eq(0)>div').css({
-	// 	'transform':'rotate(' + deg + 'deg)',
- //    	'-ms-transform':'rotate(' + deg + 'deg)', /* IE 9 */
- //        '-moz-transform':'rotate(' + deg + 'deg)', /* Firefox */
- //      	'-webkit-transform':'rotate(' + deg + 'deg)', /* Safari and Chrome */
- //      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
-	// });
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
 	$('#map_canvas').animate({rotate: r +'deg'}, 0);
 
@@ -99,8 +95,19 @@ function unlock() {
 function shoot(name) {
 	// console.log('call socket.emit attack, name: ' + name );
 	audioPlay('missle');
-	socket.emit('shoot', { name: user.name, x: user.x, y: user.y, r: user.r } );
+	socket.emit('shoot', { name: user.name, x: user.x, y: user.y, target: name } );
 }
+function shooting(id, x, y, status) {
+	console.log('call socket.emit shooting, id: ' + id );
+	socket.emit('shooting', { name: id, x: x, y: y, status: status } );
+}
+
+function hitted(data) {
+	console.log('call socket.emit hitted, data: ' + data );
+	socket.emit('hitted', data);
+	Lose();
+}
+
 
 function audioPlay(name) {
 	var obj = document.getElementById(name);
