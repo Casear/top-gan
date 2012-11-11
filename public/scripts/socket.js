@@ -40,7 +40,7 @@ socket.on('connect', function() {
 			var items = Math.round(Math.random()*5);
 			var count = $('#c1').text();
 			$('#c1').text(parseInt(count,10) + parseInt(items,10));
-			alert('you win, you get ' +  items + ' missile!');
+			// alert('you win, you get ' +  items + ' missile!');
 		});
 	});
     socket.on('userjoined',function(data){
@@ -122,7 +122,7 @@ function shoot(name) {
 }
 	
 function shooting(id, x, y, status) {
-	console.log('call socket.emit shooting, id: ' + id );
+	console.log('call socket.emit shooting, id: ' + id + ', status: ' + status);
 	socket.emit('shooting', { name: id, x: x, y: y, status: status } );
 }
 
