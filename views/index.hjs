@@ -104,7 +104,7 @@
 
     <div class='users'>
         <div>Totlal:<span id='totalVal'></span></div>
-        <div><img src='' />Casear</div>        
+        
     </div>
 <div id="info" class='hide'>
     <div class='mainGame'>
