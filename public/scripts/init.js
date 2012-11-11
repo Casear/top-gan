@@ -46,10 +46,107 @@ var weapon = {
 var shot_x = 0, shot_y = 0;
 var shot_increX = 0, shot_increY = 0;
 var index = 0;
+function attacked(name, type) {
+
+    var loc = {
+        creX: user.x,
+        creY: user.y,
+        increX: 0,
+        increY: 0,
+        limited: 10,
+        speed: (type == 2) ? weapon.bomb.speed : weapon.missile.speed,
+        attack: null,
+        destination: null
+    };
+
+    $.each(plyers, function(i, value){
+        console.log(value);
+        if (value.name == name) {
+            destination = value;
+        }
+    });
+
+    if (!loc.destination) return;
+
+    if (type == 2) {
+        if (weapon.bomb.count < 1) return; 
+        weapon.bomb.count --;
+        weapon.bomb.shoted.push(loc);
+    } else {
+        if (weapon.missile.count < 1) return; 
+        weapon.missile.count --;
+        weapon.missile.shoted.push(loc);
+    }
+    
+    var image = new google.maps.MarkerImage(
+        ((type == 2) ? 'images/bomb2.png' : 'images/bomb1.png'),
+        null, // size
+        null, // origin
+        new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+        new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
+    );
+
+    var myshot = new google.maps.Marker({
+        flat: true,
+        icon: image,
+        map: map,
+        optimized: false,
+        position: new google.maps.LatLng(user.x, user.y),
+        visible: true
+    });
+
+    loc.attack = window.setInterval(function() {
+        // console.log(loc.limited);
+        if (loc.limited <= 0) {
+            window.clearInterval(loc.attack);
+        }
+        loc.limited--;
+
+
+ 
+        // shotRotation();
+        var newlat = shot_x +0.2;//+ shot_increX;
+        var newlng = shot_y ;//+ shot_increY;
+        // if (newlat > 80) newlat = newlat - 160;
+
+        // console.log('lat: ' + newlat + ', lng: ' + newlng);
+
+        // myshot.setPosition(new google.maps.LatLng(newlat, newlng));
+        // shot_x = newlat;
+        // shot_y = newlng;
+        // fly(user.name, user.x, user.y, user.r);
+        // myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
+        // map.setCenter(new google.maps.LatLng(user.x, user.y));
+    },500);
+    
+    // shot_x = user.x;
+    // shot_y = user.y;
+
+    // var attack = window.setInterval(function() {
+    //     if (index > 3) {
+    //         window.clearInterval(attack);
+    //         index = 0;
+    //     }
+    //     index +=1;
+    //     shotRotation();
+    //     var newlat = shot_x +0.2;//+ shot_increX;
+    //     var newlng = shot_y ;//+ shot_increY;
+    //     if (newlat > 80) newlat = newlat - 160;
+
+    //     console.log('lat: ' + newlat + ', lng: ' + newlng);
+
+    //     myshot.setPosition(new google.maps.LatLng(newlat, newlng));
+    //     shot_x = newlat;
+    //     shot_y = newlng;
+    //     // fly(user.name, user.x, user.y, user.r);
+    //     // myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
+    //     // map.setCenter(new google.maps.LatLng(user.x, user.y));
+    // },500);
+}
+
 function shot(name, type) {
 
     var loc = {
-        target: name,
         creX: user.x,
         creY: user.y,
         increX: 0,
