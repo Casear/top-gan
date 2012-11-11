@@ -1,6 +1,5 @@
 <script type="text/javascript" charset="utf-8">
     $(function(){
-            
             var flightType='';
             $('.country').click(function(){
                 $('#lb').html($(this).text()+'<span class="caret"></span>');   
@@ -89,25 +88,57 @@
     </div>
 </div>
 
-<div id="map_canvas" style="width:100%; height:100%"></div> 
-
-<audio id='fly' src="/musics/fly.mp3" preload loop  ></audio>
+<audio id='fly' src="/musics/fly.ogg" preload loop  ></audio>
  <audio id='warning' preload >
-    <source src="/musics/warning.mp3">
+    <source src="/musics/warning.ogg">
 </audio>
 <audio id='expl' preload >
-    <source src="/musics/expl.mp3">
+    <source src="/musics/expl.ogg">
 </audio>
 <audio id='lock' preload> 
-    <source src="/musics/lock.mp3">
+    <source src="/musics/lock.ogg">
+</audio>
+<audio id='missle' preload> 
+    <source src="/musics/missle.ogg">
 </audio>
 
 <div style="width:300px; height:300px; overflow: hidden; position: relative;    float: left;">
-    <div id="map_canvas" style="width:500px; height:500px; position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -250px;
-        margin-left: -250px;"></div>
+    <div id="info" style="width:500px; height:150px;background-color:black">
+        <table border="0">
+            <tr>
+                <td>
+                    <img src="/images/heart.png"></img>
+                    <img src="/images/hBar1.png"></img>
+                </td>
+                <td><span>Max</span></td>
+                <td><span>5</span></td>
+                <td><span>10</span></td>
+                <td><span>0</span></td>
+                <td>
+                    <img src="/images/icon8_N.png"></img>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="/images/star.png"></img>
+                    <img src="/images/sBar1.png"></img>
+                </td>
+                <td><img src="/images/icon1_N.png"></img></td>
+                <td><img src="/images/icon2_N.png"></img></td>
+                <td><img src="/images/icon3_N.png"></img></td>
+                <td><img src="/images/icon4_N.png"></img></td>
+                <td>
+                    <img src="/images/icon5_N.png"></img>
+                    <img src="/images/icon6_N.png"></img>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 100%; text-align: center;">
+    <div style="width:800px; height:600px; overflow: hidden; position: relative; float: left; left: 20%">
+        <div id="map_canvas" style="width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
+    </div>
+    </dvi>
 </div>
 
 
