@@ -1,6 +1,6 @@
 {
 	"name": "nko3-top-gan",
-	"version": "0.0.0-4",
+	"version": "0.0.0-5",
 	"description": "Top Gan",
 	"main": "server.js",
 	"scripts": {
@@ -28,6 +28,6 @@
 	"subdomain": "top-gan.nko3",
 	"domains": [
 		"topgan.tw",
-        "www.topgan.tw"
+		"www.topgan.tw"
 	]
 }
