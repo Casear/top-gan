@@ -38,13 +38,18 @@ module.exports = function(app) {
             });
         }
 
-        var getAirplanes = function(action){
+        var getAirplanes = function(name, action){
             var data = [];
-            store.hgetall("airplanes",function(err,obj){
-                for(var key in obj){
-                    data.push(JSON.parse(obj[key]));
+            var my = {};
+            store.hgetall("airplanes",function(err,objs){
+                for(var key in objs){
+                    var obj = JSON.parse(objs[key]); 
+                    data.push(obj);
+                    if (key==name) {
+                        my = obj;
+                    }
                 }
-                action(data);
+                action({data:my,userlist:data});
             });
         };
 
@@ -77,7 +82,7 @@ module.exports = function(app) {
                             store.hset('airplanes',airplane.name,JSON.stringify(data),function(){
                                 socket.broadcast.emit('userjoined',data);
                                 socket.broadcast.emit('war',data);
-                                getAirplanes(function(planes){
+                                getAirplanes(airplane.name, function(planes){
                                     socket.emit('init',planes);
                                 });
                             });
