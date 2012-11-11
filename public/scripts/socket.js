@@ -6,6 +6,11 @@ socket.on('connect', function() {
 
     socket.on('init', function(rdata) {
         var data=rdata.data;
+        $('#totalVal').text(rdata.userlist.length);
+        for(var i=0;i<rdata.userlist.length;i++)
+        {
+            $('.users').append('<div id="list_'+rdata.userlist[i].plane.name+'" style="margin:3px"><img style="width:50px;height:25px" src="/images/'+countries[rdata.userlist[i].plane.country].flag+'">&nbsp;'+rdata.userlist[i].plane.name+'</div>');
+        }
         $('#loginScreen').hide(); $('#info').show();
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
@@ -31,6 +36,13 @@ socket.on('connect', function() {
 			attacked(data);
 		});
 	});
+    socket.on('userjoined',function(data){
+            $('.users').append('<div id="list_'+data.plane.name+'" style="margin:3px"><img style="width:50px;height:25px" src="/images/'+countries[data.plane.country].flag+'">&nbsp;'+data.plane.name+'</div>');
+    });
+    socket.on('userleaved',function(data){
+        $('#list_'+data.name).remove();
+        $('#totalVal').text($('.users').children().length); 
+    });
     socket.on('error',function(data){
         // console.log('user exsit');
         $('#msg').removeClass('hide').text('Account already exist')
