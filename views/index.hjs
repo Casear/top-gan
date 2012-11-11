@@ -138,7 +138,7 @@
                
                 
                 <td><span id='c1' style='color:white'>10</span></td>
-                <td><span id='c2' style='color:white'>10</span></td>
+                <td><span id='c2' style='color:gray'>0</span></td>
             </tr>
             <tr>
                 
