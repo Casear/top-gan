@@ -103,8 +103,7 @@ function Fire (name)
 {
 	if(selMarker.getVisible() == true)
 	{
-		alert('Fire');
-		attack(name);
+		shoot(name);
 	}
 }
 function LockPlane(name)
@@ -133,7 +132,10 @@ function removeMarker(name)
 		}
 	})
 }
-
+function Lose()
+{
+	PlaneUnitPath = 0;
+}
 
 function setMarker (json)
 {

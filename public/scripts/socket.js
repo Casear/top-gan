@@ -37,7 +37,7 @@ socket.on('connect', function() {
 
 		socket.on('hit', function(data) {
 			//console.log('socket.on hit, data:' + data);
-			alert('you win!');
+			alert('you lose!');
 		});
 	});
     socket.on('userjoined',function(data){
@@ -98,13 +98,14 @@ function shoot(name) {
 	socket.emit('shoot', { name: user.name, x: user.x, y: user.y, target: name } );
 }
 function shooting(id, x, y, status) {
-	// console.log('call socket.emit shooting, id: ' + id );
+	console.log('call socket.emit shooting, id: ' + id );
 	socket.emit('shooting', { name: id, x: x, y: y, status: status } );
 }
 
 function hitted(data) {
 	console.log('call socket.emit hitted, data: ' + data );
 	socket.emit('hitted', data);
+	Lose();
 }
 
 
