@@ -1,15 +1,17 @@
 var map;
 var markersArray = [];
+var rotationR =[]; 
 var selMarker;
 var myPlane;
 var increX = increY = 0;
 var PlaneUnitPath = 0.1 ; 
+var myimage ; 
 function initialize_map() {
 	console.log("initialize_map");
 	var latlng = new google.maps.LatLng(user.x, user.y);
 	console.log(user.x + " & " + user.y);
 	var myOptions = {
-		zoom: 8,
+		zoom: 7,
 		center: latlng,
 		disableDefaultUI: true,
 		scrollwheel: false,
@@ -17,7 +19,7 @@ function initialize_map() {
 		mapTypeControl: false,
 		scaleControl: false,
 		draggable: false,
-		//disableDoubleClickZoom : true,
+		disableDoubleClickZoom : true,
 		mapTypeId: google.maps.MapTypeId.SATELLITE
 	};
 	
@@ -27,7 +29,7 @@ function initialize_map() {
 	var imgPath = 'images/fighter' + user.plane.type[1] + '.png' ;
 
 
-	var myimage = new google.maps.MarkerImage(
+	myimage = new google.maps.MarkerImage(
 			imgPath,
 			null, // size
 			null, // origin
@@ -41,6 +43,7 @@ function initialize_map() {
 		map: map,
 		optimized: false,
 		position: new google.maps.LatLng(user.x, user.y),
+		title : user.name,
 		visible: true
 	});
 
@@ -58,8 +61,13 @@ function initialize_map() {
 		user.y = newlng;
 		fly(user.name, user.x, user.y, user.r);
 		myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
+		MarkerImageRotation();
 		map.setCenter(new google.maps.LatLng(user.x, user.y));
 		},300);
+
+
+
+
 	 	////Other plane
 		// var image = new google.maps.MarkerImage(
 		// 	'images/fighter2.png',
@@ -83,6 +91,17 @@ function initialize_map() {
 		// 	Fire();
 		// });
 }
+function MarkerImageRotation()
+{
+	setTimeout(function(){
+        $('#map_canvas>div:eq(0)>div:eq(0)>div:eq(0)>div:eq(3)>div:eq(1)').animate({rotate: - user.r  +'deg'}, 0);	
+  //       $.each(rotationR, function(i,v)
+		// {
+		// 	console.log('rotation: ' + v);
+		// 	$('#map_canvas>div:eq(0)>div:eq(0)>div:eq(0)>div:eq(3)>div:eq('+ 2+i +')').animate({rotate: - v  +'deg'}, 0);
+		// });
+	}, 1);
+}
 function Fire (name)
 {
 	attack(name);
@@ -93,13 +112,22 @@ function LockPlane(name)
 }
 function unLockPlane()
 {
-
+	unlock();
 }
 function PlaneRotation() {
 	//sin 10 = 0.173648178
 	//cos 10 = 0.984807753
-		increX = PlaneUnitPath *  Math.sin( ( 90 - deg ) / 180 * Math.PI);
-		increY = - PlaneUnitPath *  Math.cos( ( 90 - deg ) / 180 * Math.PI);
+		increX = PlaneUnitPath *  Math.sin( ( 90 - user.r ) / 180 * Math.PI);
+		increY = - PlaneUnitPath *  Math.cos( ( 90 - user.r ) / 180 * Math.PI);
+
+	// var imgPath = 'images/fighter1.png' ;
+	// myimage = new google.maps.MarkerImage(
+	// 		imgPath,
+	// 		null, // size
+	// 		null, // origin
+	// 		new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+	// 		new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
+	// 	);
 }
 
 
@@ -140,6 +168,7 @@ function setMarker (json)
 					title: json.name,
 					visible: true
 				});
+				rotationR[index] = json.r;
 				google.maps.event.addListener(markersArray[index], 'mouseover', function() {
 					if(markersArray[index].getTitle() != user.name)
 					{

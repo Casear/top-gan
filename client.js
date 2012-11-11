@@ -12,6 +12,10 @@ var plane = {
     type:1
 };
 
+function log(data){
+    console.log('log....');
+}
+
 socket.on('connect',function(){
     socket.emit('join',plane);
     socket.on('system',function(data){
@@ -25,13 +29,11 @@ socket.on('connect',function(){
         console.log(data);
         socket.emit('fly',{name:name,x:10,y:10,r:10});
     });
-    socket.on('war',function(data){
-        console.log(data);
-    });
+    socket.on('war',log);
 
-    socket.on('locked',function(){
-        console.log('be locked');
-    });
+    socket.on('userjoined',log);
+
+    socket.on('locked',log);
 
     if(target){
         socket.emit('lock',target); 

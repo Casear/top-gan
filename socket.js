@@ -29,6 +29,7 @@ module.exports = function(app) {
             
             store.hget('airplanes',name,function(err,res){
                 if(!res){
+                    console.log(name);
                     console.log('error, can not find airplane');
                     return;
                 }
@@ -74,9 +75,11 @@ module.exports = function(app) {
                         socket.set('name',airplane.name,function(){
                         
                             store.hset('airplanes',airplane.name,JSON.stringify(data),function(){
-                                io.sockets.emit('system', {msg: airplane.name + " joins the game. "});
+                                socket.broadcast.emit('userjoined',data);
                                 socket.broadcast.emit('war',data);
-                                socket.emit('init',data);
+                                getAirplanes(function(planes){
+                                    socket.emit('init',planes);
+                                });
                             });
                         });
                     }
@@ -90,39 +93,27 @@ module.exports = function(app) {
             socket.on('disconnect', function () {
                 socket.get('name',function(err,name){
                     store.hdel("airplanes",name);
-                    io.sockets.emit('system',{msg: name + ' leave game!'});
+                    socket.broadcast.emit('userleaved',name);
                     console.log('disconnection!!');
                 });
             });
 
             socket.on('lock',function(name){
                 getAirplane(name,function(data){
-                    console.log(data.id);
-                    io.sockets.socket(data.id).emit('locked');
+                    io.sockets.socket(data.id).emit('locked',{id:data.id,name:name});
                 });
             });
 
-            socket.on('attack',function(name){
-                var bom = {};
-
-                io.sockets.on('war',bom);
-            });
-
             socket.on('fly', function(plane) {
-                store.hget('airplanes',plane.name,function(err,res){
-                    if(!res){
-                        socket.emit('error',{msg:'error, can not find airplane',data:plane});
-                        return;
-                    }
-                    var aPlane = JSON.parse(res);
-
-                    aPlane.x = plane.x;
-                    aPlane.y = plane.y;
-                    aPlane.r = plane.r;
+                getAirplane(plane.name,function(data){
+                    aPlane.x = data.x;
+                    aPlane.y = data.y;
+                    aPlane.r = data.r;
                     store.hset('airplanes',plane.name,JSON.stringify(aPlane),function(){
                         socket.broadcast.emit('war',aPlane); 
                     });
                 });
+                
             });
         });
 
