@@ -19,7 +19,7 @@ function initialize_map() {
 		mapTypeControl: false,
 		scaleControl: false,
 		draggable: false,
-		disableDoubleClickZoom : true,
+		//disableDoubleClickZoom : true,
 		mapTypeId: google.maps.MapTypeId.SATELLITE
 	};
 	
@@ -44,14 +44,11 @@ function initialize_map() {
 		optimized: false,
 		position: new google.maps.LatLng(user.x, user.y),
 		title : user.name,
-		visible: true
+		visible: true,
+		zIndex : 10000
 	});
 
     createCityMap(map);        
-            
-        
-
-
 	window.setInterval(function() {
 		PlaneRotation();
 		var newlat = user.x + increX;
@@ -120,7 +117,10 @@ function PlaneRotation() {
 		increX = PlaneUnitPath *  Math.sin( ( 90 - user.r ) / 180 * Math.PI);
 		increY = - PlaneUnitPath *  Math.cos( ( 90 - user.r ) / 180 * Math.PI);
 }
+function removeMarker(name)
+{
 
+}
 
 
 function setMarker (json)
