@@ -135,10 +135,10 @@
         </table>
     </div>
     <div style="width: 100%; text-align: center;">
-    <div style="width:800px; height:600px; overflow: hidden; position: relative; float: left; left: 20%">
-        <div id="map_canvas" style="width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
+        <div style="width:800px; height:600px; overflow: hidden; position: relative; float: left; left: 20%">
+            <div id="map_canvas" style="width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
+        </div>
     </div>
-    </dvi>
 </div>
 
 
