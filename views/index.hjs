@@ -131,14 +131,17 @@
     </div>
 <div id="info" class='hide'>
     <div class='mainGame'>
-        <div class="form-search">
-        <input type='text' id='tbMessage' placeholder="Message"></input><button id='btnB' class='btn'>Send</button> 
+        <div style="color:white;width:700px">Please use left arrow and right arrow button to control plane. You can lock other plane by clicking mouse left button and click again to launch the missile.Welcome ask friend to join together. </div>
+        <div class="form-search" style='width:500px'>
+            <input type='text' id='tbMessage' placeholder="Message"></input><button id='btnB' class='btn'>Send</button>
     </div>
-        <div id='lbMessage' style='float:left;width:700px;height:100px;overflow:auto'> 
+        <div id='lbMessage' style='float:left;width:700px;height:50px;overflow:auto'> 
 
 
         </div>  
-        <table class='menu' border="0">
+    </div>
+
+        <table class='menu' border="0" style='float:right;'>
             <tr>
                 
                
@@ -154,7 +157,6 @@
                 <td><div id='e2' class='e2_d'></div></td>
             </tr>
         </table>
-    </div>
     <div class='mainGame'>
         <div id='m' style="width:900px; height:500px; overflow: hidden; position: relative; float: left;">
             <div id="map_canvas" style="z-index:100;width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
