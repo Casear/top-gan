@@ -6,6 +6,7 @@ var myPlane;
 var increX = increY = 0;
 var PlaneUnitPath = 0.1 ; 
 var myimage ; 
+var planeInterval ; 
 function initialize_map() {
 	console.log("initialize_map");
 	var latlng = new google.maps.LatLng(user.x, user.y);
@@ -48,8 +49,8 @@ function initialize_map() {
 		zIndex : 10000
 	});
 
-    createCityMap(map);        
-	window.setInterval(function() {
+    //createCityMap(map);        
+	planeInterval =window.setInterval(function() {
 		PlaneRotation();
 		var newlat = user.x + increX;
 		var newlng = user.y + increY;
@@ -86,12 +87,12 @@ function initialize_map() {
 			position: new google.maps.LatLng(user.x, user.y),
 			visible: false
 		});
-		google.maps.event.addListener(selMarker, 'mousedown', function() {
-			Fire();
-		});
-		// google.maps.event.addListener(selMarker, 'mouseup', function() {
+		// google.maps.event.addListener(selMarker, 'mousedown', function() {
 		// 	Fire();
 		// });
+		google.maps.event.addListener(selMarker, 'mouseup', function() {
+			Fire();
+		});
 }
 function MarkerImageRotation()
 {
@@ -104,11 +105,13 @@ function MarkerImageRotation()
 		// });
 	}, 1);
 }
-function Fire (name)
+function Fire ()
 {
-	if(selMarker.getVisible() == true)
+
+	if(lockplanename != '')
 	{
-		shoot(name);
+		console.log('shoot =>' + lockplanename);
+		shoot(lockplanename);
 	}
 }
 function LockPlane(name)
@@ -140,19 +143,22 @@ function removeMarker(name)
 function Lose()
 {
 	PlaneUnitPath = 0;
+	window.clearInterval(planeInterval);
 }
 
 function setMarker (json)
 {
 	if(user != null)
 	{
-		if(json.plane != 'undefine')
+		
+		
+		if(json.plane != undefined)
 		{
 			setPlane (json);
 		}
 		else
 		{
-			setBome(json);
+			setBomb(json);
 		}
 	}
 }
@@ -196,10 +202,13 @@ var IsExist = 0;
 			{
 				selMarker.setPosition(markersArray[index].getPosition());
 				selMarker.setVisible(true);
+				lockplanename = markersArray[index].getTitle();
 				setTimeout(function(){
 					selMarker.setPosition(markersArray[index].getPosition());
 					selMarker.setVisible(true);},1000);
-				setTimeout(function(){selMarker.setVisible(false);unLockPlane();},2000);
+					setTimeout(function(){selMarker.setVisible(false);unLockPlane();
+					lockplanename = '';
+				},2000);
 				LockPlane(markersArray[index].getTitle());
 			}				
 		});
@@ -207,12 +216,13 @@ var IsExist = 0;
 		// 	selMarker.setVisible(false);
 		// 	unLockPlane();
 		// });
-		google.maps.event.addListener(markersArray[index], 'mousedown', function() {
-			Fire( markersArray[index].getTitle());
-		});
+		// google.maps.event.addListener(markersArray[index], 'click', function() {
+		// 	Fire();
+		// });
 	}
 }
-function setBome( json)
+var lockplanename ='' ;
+function setBomb( json)
 {
-
+	console.log("Bomb  " +json.bomb);
 }

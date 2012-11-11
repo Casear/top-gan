@@ -19,9 +19,9 @@
                     $(this).attr('class','e1_s');
                 });
             $('#e2').click(function(){
-                    flightType='f2';
-                    $('#e1').attr('class','e1');
-                    $(this).attr('class','e2_s');
+                    //flightType='f2';
+                    //$('#e1').attr('class','e1');
+                    //$(this).attr('class','e2_s');
                 });
             
             $('#f1').click(function(){
@@ -138,14 +138,14 @@
                
                 
                 <td><span id='c1' style='color:white'>10</span></td>
-                <td><span id='c2' style='color:white'>10</span></td>
+                <td><span id='c2' style='color:gray'>0</span></td>
             </tr>
             <tr>
                 
                
             
-                <td><div id='e1' class='e1'></div></td>
-                <td><div id='e2' class='e2'></div></td>
+                <td><div id='e1' class='e1 e1_s'></div></td>
+                <td><div id='e2' class='e2_d'></div></td>
             </tr>
         </table>
     </div>
