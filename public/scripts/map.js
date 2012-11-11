@@ -119,7 +119,15 @@ function PlaneRotation() {
 }
 function removeMarker(name)
 {
+	alert('removeMarker');
+	$.each(markersArray, function(i,v)
+	{
+		if(v.getTitle() == name)
+		{
+			v.setMap(null);
 
+		}
+	})
 }
 
 
