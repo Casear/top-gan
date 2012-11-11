@@ -11,6 +11,19 @@
                     backdrop:false
                     });
                 });
+
+            $('#e1').click(function(){
+                 
+                    $('#e2').attr('class','e2');
+                  
+                    $(this).attr('class','e1_s');
+                });
+            $('#e2').click(function(){
+                    flightType='f2';
+                    $('#e1').attr('class','e1');
+                    $(this).attr('class','e2_s');
+                });
+            
             $('#f1').click(function(){
                     flightType='f1';
                     $('#f2').attr('class','f2');
@@ -118,22 +131,29 @@
                 
                
                 
-                <td><span style='color:white'>5</span></td>
-                <td><span style='color:white'>10</span></td>
-                <td><span style='color:white'>0</span></td>
+                <td><span id='c1' style='color:white'>10</span></td>
+                <td><span id='c2' style='color:white'>10</span></td>
             </tr>
             <tr>
                 
                
-                <td><img src="/images/icon1_N.png"></img></td>
-                <td><img src="/images/icon2_N.png"></img></td>
-                <td><img src="/images/icon3_N.png"></img></td>
+            
+                <td><div id='e1' class='e1'></div></td>
+                <td><div id='e2' class='e2'></div></td>
             </tr>
         </table>
     </div>
     <div class='mainGame'>
         <div style="width:900px; height:500px; overflow: hidden; position: relative; float: left;">
-            <div id="map_canvas" style="width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
+            <div id="map_canvas" style="z-index:100;width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
+       
+       
+    <div id='point' style='position: absolute;z-index:99999'>
+        <img src='/images/redpoint.png'/>
+    </div>
+    <div style='position: absolute;z-index:99999;width:237px;height:100'>
+        <img src='/images/worldMap.png'/>
+    </div>
         </div>
     </div>
 </div>
