@@ -24,7 +24,12 @@ module.exports = function(app) {
         function randomFromTo(from, to){
             return Math.floor(Math.random() * (to - from + 1) + from);
         }
-
+function htmlEscape(text) {
+       return text.replace(/&/g, '&amp;').
+                replace(/</g, '&lt;').
+                     replace(/"/g, '&quot;').
+                          replace(/'/g, '&#039;');
+}
         function getAirplane(name,cb){
             
             store.hget('airplanes',name,function(err,res){
@@ -57,6 +62,7 @@ module.exports = function(app) {
 
 	io.sockets.on('connection', function(socket) {
             socket.on('join', function(airplane) {
+                airplane.name = htmlEscape(airplane.name);
                 if(!airplane.name){
                     io.sockets.emit('error',{msg:"empty user name!!"});
                     return;
@@ -104,12 +110,16 @@ module.exports = function(app) {
             });
 
             socket.on('lock',function(name){
+                console.log('lock');
                 getAirplane(name,function(data){
                     io.sockets.socket(data.id).emit('locked',{id:data.id,name:name});
                 });
             });
 
             socket.on('shoot',function(attackObj){
+                console.log('shoot');
+
+                console.log(attackObj);
                 getAirplane(attackObj.target,function(data){
                     io.sockets.socket(data.id).emit('attacked',attackObj);
                 });
@@ -128,6 +138,8 @@ module.exports = function(app) {
             });
 
             socket.on('message',function(mesg){
+                mesg.name = htmlEscape(mesg.name);
+                mesg.msg = htmlEscape(mesg.msg);
                 socket.broadcast.emit('message',mesg);
             });
 

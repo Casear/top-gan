@@ -8,12 +8,12 @@ var name = process.argv[2],
 
 var plane = {
     name:name,
-    country:'taiwan',
+    country:'Taiwan',
     type:1
 };
 
 function log(data){
-    console.log('log....');
+    //console.log(data);
 }
 
 socket.on('connect',function(){
@@ -33,10 +33,13 @@ socket.on('connect',function(){
 
     socket.on('userjoined',log);
 
+    socket.on('message',function(data){console.log(data);});
+
     socket.on('locked',log);
 
     if(target){
-        socket.emit('lock',target); 
+        socket.emit('lock',target);
+        socket.emit('message',{name:'key',msg:'hello xx'});
     }
 });
 
