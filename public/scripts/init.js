@@ -91,7 +91,10 @@ function attacked(data, type) {
     });
 
     loc.attack = window.setInterval(function() {
-        console.log('data.x: ' + data.x + ', data.y: ' + data.y + 'user.x: ' + user.x + ', user.y: ' + user.y);
+        console.log('data, x: ' + data.x + ', y: ' + data.y + 
+            ' | user, x: ' + user.x + ', y: ' + user.y +
+            ' | diff, x: ' + (data.x - user.x) + ', y: ' + (data.y - user.y) +
+            );
 
         if (Math.abs(user.y - loc.increY) < 0.2) {
             window.clearInterval(loc.attack);
