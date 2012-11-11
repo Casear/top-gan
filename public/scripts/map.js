@@ -273,7 +273,7 @@ function setBomb( json)
 				null, // size
 				null, // origin
 				new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-				new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
+				new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
 			);
 		arrayMissle[arrayMissle.length] = new google.maps.Marker({
 			flat: true,
