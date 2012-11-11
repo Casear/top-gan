@@ -4,7 +4,7 @@ socket.on('connect', function() {
     console.log('Client has connected to the server!');
 
     socket.on('init', function(data) {
-        $('#loginScreen').hide();
+        $('#loginScreen').hide(); $('#info').show();
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
 	    initialize_map();
@@ -17,8 +17,8 @@ socket.on('connect', function() {
 		});
 
 		socket.on('locked', function(data) {
-			console.log('socket.on locked, data:' + data);
-			audioPlay('waring');
+			// console.log('socket.on locked, data:' + data);
+			audioPlay('warning');
 		});
 
 		socket.on('attacked', function(data) {
@@ -28,14 +28,12 @@ socket.on('connect', function() {
 		});
 	});
     socket.on('error',function(data){
-        console.log('user exsit');
+        // console.log('user exsit');
         $('#msg').removeClass('hide').text('Account already exist')
     });
 	socket.on('system', function(data) {
 		//console.log('socket.on system, data:' + data.msg);
 	});
-
-	
 });
 
 function join(name, country, aircraft) {
@@ -63,7 +61,6 @@ function rotate(name, x, y, r) {
  //      	'-o-transform':'rotate(' + deg + 'deg)' /* Opera */
 	// });
 	// $('#map_canvas').find('>div>div>div:eq(0)>div').rotate(deg + 'deg');
-	//map.panDirection(-1,0);
 	$('#map_canvas').animate({rotate: r +'deg'}, 0);
 
 	var newlatlng = new google.maps.LatLng(x, y);
@@ -72,18 +69,19 @@ function rotate(name, x, y, r) {
 }
 
 function lock(name) {
-	//console.log('call socket.emit lock, name: ' + name );
+	// console.log('call socket.emit lock, name: ' + name );
 	audioPlay('lock');
-	socket.emit('lock', { name: name });
+	socket.emit('lock', name);
 }
 function unlock() {
-	//console.log('call socket.emit lock, name: ' + name );
+	// console.log('call socket.emit lock, name: ' + name );
 	audioStop('lock');
 }
 
 function attack(name) {
-	//console.log('call socket.emit attack, name: ' + name );
-	socket.emit('attack', { name: name });
+	// console.log('call socket.emit attack, name: ' + name );
+	audioPlay('missle');
+	socket.emit('attack', name );
 }
 
 function audioPlay(name) {
@@ -91,20 +89,17 @@ function audioPlay(name) {
 	obj.play();
 }
 function audioStop(name) {
-	console.log('1');
 	var obj = document.getElementById(name);
-	console.log(obj.length);
 	obj.pause();
 }
 
 document.onkeydown =  function(evt) {
 	//37 left, 39 right
 	var evt  = (evt) ? evt : ((event) ? event : null); 
-	console.log(evt.keyCode);
+	// console.log(evt.keyCode);
 	var r = (evt.keyCode == 37) ? -10 : ((evt.keyCode == 39) ? 10 : 0); 
 
 	if (user) {
 		rotate(user.name, user.x, user.y, r);
 	}
-
 }
