@@ -97,7 +97,7 @@ function attacked(data, type) {
             ' | diff, x: ' + (loc.increX - user.x) + ', y: ' + (loc.increY - user.y)
             );
 
-        if (Math.abs(user.y - loc.increY) < 0.2) {
+        if (Math.abs(user.x - loc.increX) < 0.2 && Math.abs(user.y - loc.increY) < 0.2) {
             window.clearInterval(loc.attack);
             isShot = false;
             setBomb(user.name, user.x, user.y, loc.target);
