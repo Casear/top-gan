@@ -37,7 +37,10 @@ socket.on('connect', function() {
 
 		socket.on('hit', function(data) {
 			//console.log('socket.on hit, data:' + data);
-			alert('you lose!');
+			var items = Math.round(Math.random()*5);
+			var count = $('#c1').text();
+			$('#c1').text(count + items);
+			alert('you win, you get ' +  items + ' missile!');
 		});
 	});
     socket.on('userjoined',function(data){
@@ -102,9 +105,17 @@ function unlock() {
 
 function shoot(name) {
 	// console.log('call socket.emit attack, name: ' + name );
-	audioPlay('missle');
-	socket.emit('shoot', { name: user.name, x: user.x, y: user.y, target: name } );
+	
+	var count = $('#c1').text();
+	if (count != "0") {
+		audioPlay('missle');
+		count --;
+
+		socket.emit('shoot', { name: user.name, x: user.x, y: user.y, target: name } );
+		$('#c1').text(count);
+	}
 }
+	
 function shooting(id, x, y, status) {
 	console.log('call socket.emit shooting, id: ' + id );
 	socket.emit('shooting', { name: id, x: x, y: y, status: status } );
