@@ -22,19 +22,6 @@ socket.on('connect', function() {
 	    socket.on('war', function(data) {
 			//console.log('socket.on war, data:' + data);
 			players = data;
-            if($('#point_'+data.name).length==0)
-            {
-                var np= $(" <div id='point' style='position: absolute;z-index:99999'><img src='/images/yellowPoint.png'/></div>");
-                $('#m').append(np);
-                var tmpy=(data.y+180)/360*237;
-                var tmpx=(90-data.x)/180*100;
-                np.css('left',tmpy).css('top',tmpx);
-            }else{
-                var tmpy=(data.y+180)/360*237;
-                var tmpx=(90-data.x)/180*100;
-                $('#point_'+data.name).css('left',tmpy).css('top',tmpx);
-            
-            }
 			setMarker(data);
 		});
 

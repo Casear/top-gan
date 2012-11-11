@@ -93,17 +93,19 @@ function attacked(data, type) {
     loc.attack = window.setInterval(function() {
         console.log('data, x: ' + data.x + ', y: ' + data.y + 
             ' | user, x: ' + user.x + ', y: ' + user.y +
-            ' | diff, x: ' + (data.x - user.x) + ', y: ' + (data.y - user.y) +
+            ' | diff, x: ' + (loc.increX - user.x) + ', y: ' + (loc.increY - user.y)
             );
 
         if (Math.abs(user.y - loc.increY) < 0.2) {
             window.clearInterval(loc.attack);
             setBomb(user.name, user.x, user.y, loc.target);
             hitted(data);
+            loc.myshot = null;
         }
         if (loc.limited <= 0) {
             window.clearInterval(loc.attack);
             setBomb(user.name, user.x, user.y, loc.target);
+            loc.myshot = null;
         }
         loc.limited--;
 
