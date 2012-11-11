@@ -120,6 +120,7 @@ module.exports = function(app) {
             });
 
             socket.on('hitted',function(attackObj){
+                socket.broadcast.emit('userleaved',attackObj.target);
                 getAirplane(attackObj.name,function(data){
                     io.sockets.socket(data.id).emit('hit',attackObj);
                 });
