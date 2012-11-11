@@ -52,7 +52,7 @@ socket.on('connect', function() {
 			//console.log('socket.on hit, data:' + data);
 			var items = Math.round(Math.random()*5);
 			var count = $('#c1').text();
-			$('#c1').text(count + items);
+			$('#c1').text(parseInt(count,10) + parseInt(items,10));
 			alert('you win, you get ' +  items + ' missile!');
 		});
 	});
