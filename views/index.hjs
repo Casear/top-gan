@@ -65,6 +65,12 @@
             $('#btnB').click(function(){
                         sendMessage(user.name,$('#tbMessage').val());                    
                     
+                        });
+                $("#tnMessage").keypress(function (e) {
+                        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                           
+                        sendMessage(user.name,$('#tbMessage').val());                    
+                        }
                     });
     });      
 </script>
