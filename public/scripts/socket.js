@@ -27,7 +27,8 @@ socket.on('connect', function() {
 		socket.on('attacked', function(data) {
 			//console.log('socket.on attacked, data:' + data);
 			// bomb();
-			audioPlay('exl');
+			// audioPlay('exl');
+			attacked(data);
 		});
 	});
     socket.on('error',function(data){
@@ -84,8 +85,7 @@ function unlock() {
 function attack(name) {
 	// console.log('call socket.emit attack, name: ' + name );
 	audioPlay('missle');
-	shot(name);
-	socket.emit('attack', name );
+	socket.emit('attack', { name: user.name, x: user.x, y: user.y, r: user.r } );
 }
 
 function audioPlay(name) {
