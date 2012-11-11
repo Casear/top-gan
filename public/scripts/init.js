@@ -157,7 +157,7 @@ function setBomb(name, x, y, target) {
         position: new google.maps.LatLng(x, y),
         visible: true
     });
-    shooting(name + '_' + target, x, y, 0);
+    shooting(name + '_' + target, x, y, 1);
 }
 
 window.onload = function() {
