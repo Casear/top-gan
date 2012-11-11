@@ -68,13 +68,13 @@ function initialize_map() {
 
 
 
-	 	//Lock Marker
+	 	//Lock flighter
 		var image = new google.maps.MarkerImage(
-			'images/fighter2.png',
+			'images/LockFighter.png',
 			null, // size
 			null, // origin
 			new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-			new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
+			new google.maps.Size( 55, 55 ) // scaled size (required for Retina display icon)
 		);
 		selMarker = new google.maps.Marker({
 			flat: true,
@@ -84,12 +84,12 @@ function initialize_map() {
 			position: new google.maps.LatLng(user.x, user.y),
 			visible: false
 		});
-		// google.maps.event.addListener(selMarker, 'mousedown', function() {
-		// 	Fire();
-		// });
-		// google.maps.event.addListener(selMarker, 'mouseup', function() {
-		// 	Fire();
-		// });
+		google.maps.event.addListener(selMarker, 'mousedown', function() {
+			Fire();
+		});
+		google.maps.event.addListener(selMarker, 'mouseup', function() {
+			Fire();
+		});
 }
 function MarkerImageRotation()
 {
@@ -163,14 +163,14 @@ function setMarker (json)
 				google.maps.event.addListener(markersArray[index], 'mouseover', function() {
 					if(markersArray[index].getTitle() != user.name)
 					{
-						// selMarker.setPosition(markersArray[index].getPosition());
-						// selMarker.setVisible(true);
+						selMarker.setPosition(markersArray[index].getPosition());
+						selMarker.setVisible(true);
 						LockPlane(markersArray[index].getTitle());
 					}				
 				});
 				google.maps.event.addListener(markersArray[index], 'mouseout', function() {
-					// selMarker.setVisible(false);
-					// unLockPlane();
+					selMarker.setVisible(false);
+					unLockPlane();
 				});
 				google.maps.event.addListener(markersArray[index], 'click', function() {
 					Fire( markersArray[index].getTitle());
