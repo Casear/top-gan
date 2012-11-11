@@ -1,6 +1,6 @@
 {
 	"name": "nko3-top-gan",
-	"version": "0.0.0-10",
+	"version": "0.0.0-11",
 	"description": "Top Gan",
 	"main": "server.js",
 	"scripts": {
