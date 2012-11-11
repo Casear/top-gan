@@ -35,8 +35,17 @@ a {
   width: 300px;
   margin: -250px 0 0 -150px;
 }
-#info {
+.mainGame {
   margin: 0 0 0 200px;
+}
+.users {
+  overflow: auto;
+  background-color: #000;
+  margin: 50px 0 0 0;
+  width: 200px;
+  position: absolute;
+  text-align: left;
+  color: #fff;
 }
 .menu {
   text-align: center;

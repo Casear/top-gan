@@ -102,8 +102,13 @@
     <source src="/musics/missle.ogg">
 </audio>
 
-<div>
-    <div id="info" class='hide'>
+    <div class='users'>
+        <div>Totlal:<span id='totalVal'></span></div>
+        
+    </div>
+<div id="info" class='hide'>
+    <div class='mainGame'>
+     
         <div style='float:left'> 
                     <img src="/images/heart.png"></img>
                     <img src="/images/hBar1.jpg"></img>
@@ -126,8 +131,8 @@
             </tr>
         </table>
     </div>
-    <div style="width: 100%; text-align: center;">
-        <div style="width:900px; height:500px; overflow: hidden; position: relative; float: left; left: 20%">
+    <div class='mainGame'>
+        <div style="width:900px; height:500px; overflow: hidden; position: relative; float: left;">
             <div id="map_canvas" style="width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
         </div>
     </div>
