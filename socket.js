@@ -114,7 +114,11 @@ module.exports = function(app) {
                     io.sockets.socket(data.id).emit('attacked',attackObj);
                 });
             });
-            
+           
+            socket.on('shooting',function(bomb){
+                socket.broadcast.emit('war',bomb);
+            });
+
             socket.on('hitted',function(attackObj){
                 getAirplane(attackObj.name,function(data){
                     io.sockets.socket(data.id).emit('hit',attackObj);
