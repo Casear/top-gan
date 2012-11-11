@@ -102,13 +102,13 @@ function attacked(data, type) {
             isShot = false;
             setBomb(user.name, user.x, user.y, loc.target);
             hitted(data);
-            loc.myshot = null;
+            //loc.myshot = null;
         }
         if (loc.limited <= 0) {
             isShot = false;
             window.clearInterval(loc.attack);
             setBomb(user.name, user.x, user.y, loc.target);
-            loc.myshot = null;
+            //loc.myshot = null;
         }
         loc.limited--;
 
