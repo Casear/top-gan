@@ -122,7 +122,7 @@ document.onkeydown =  function(evt) {
 	//37 left, 39 right
 	var evt  = (evt) ? evt : ((event) ? event : null); 
 	// console.log(evt.keyCode);
-	var r = (evt.keyCode == 37) ? -10 : ((evt.keyCode == 39) ? 10 : 0); 
+	var r = (evt.keyCode == 37) ? 10 : ((evt.keyCode == 39) ? -10 : 0); 
 
 	if (user) {
 		rotate(user.name, user.x, user.y, r);
