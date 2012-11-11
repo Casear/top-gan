@@ -97,6 +97,10 @@ function shoot(name) {
 	audioPlay('missle');
 	socket.emit('shoot', { name: user.name, x: user.x, y: user.y, target: name } );
 }
+function shooting(id, x, y, status) {
+	// console.log('call socket.emit shooting, id: ' + id );
+	socket.emit('shooting', { name: id, x: x, y: y, status: status } );
+}
 
 function hitted(data) {
 	console.log('call socket.emit hitted, data: ' + data );
