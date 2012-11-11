@@ -87,12 +87,12 @@ function initialize_map() {
 			position: new google.maps.LatLng(user.x, user.y),
 			visible: false
 		});
-		google.maps.event.addListener(selMarker, 'mousedown', function() {
-			Fire();
-		});
-		// google.maps.event.addListener(selMarker, 'mouseup', function() {
+		// google.maps.event.addListener(selMarker, 'mousedown', function() {
 		// 	Fire();
 		// });
+		google.maps.event.addListener(selMarker, 'mouseup', function() {
+			Fire();
+		});
 }
 function MarkerImageRotation()
 {
@@ -105,11 +105,13 @@ function MarkerImageRotation()
 		// });
 	}, 1);
 }
-function Fire (name)
+function Fire ()
 {
-	if(selMarker.getVisible() == true)
+
+	if(lockplanename != '')
 	{
-		shoot(name);
+		console.log('shoot =>' + lockplanename);
+		shoot(lockplanename);
 	}
 }
 function LockPlane(name)
@@ -200,10 +202,13 @@ var IsExist = 0;
 			{
 				selMarker.setPosition(markersArray[index].getPosition());
 				selMarker.setVisible(true);
+				lockplanename = markersArray[index].getTitle();
 				setTimeout(function(){
 					selMarker.setPosition(markersArray[index].getPosition());
 					selMarker.setVisible(true);},1000);
-				setTimeout(function(){selMarker.setVisible(false);unLockPlane();},2000);
+					setTimeout(function(){selMarker.setVisible(false);unLockPlane();
+					lockplanename = '';
+				},2000);
 				LockPlane(markersArray[index].getTitle());
 			}				
 		});
@@ -211,12 +216,13 @@ var IsExist = 0;
 		// 	selMarker.setVisible(false);
 		// 	unLockPlane();
 		// });
-		google.maps.event.addListener(markersArray[index], 'mousedown', function() {
-			Fire( markersArray[index].getTitle());
-		});
+		// google.maps.event.addListener(markersArray[index], 'click', function() {
+		// 	Fire();
+		// });
 	}
 }
+var lockplanename ='' ;
 function setBomb( json)
 {
-	console.log("Bomb" +json.bomb);
+	console.log("Bomb  " +json.bomb);
 }
