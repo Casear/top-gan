@@ -57,6 +57,11 @@ function initialize_map() {
 		user.x = newlat;
 		user.y = newlng;
 		fly(user.name, user.x, user.y, user.r);
+        
+        var tmpy=(user.y+180)/360*237;
+        var tmpx=(90-user.x)/180*100;
+        $('#point').css('left',tmpy).css('top',tmpx);
+
 		myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
 		MarkerImageRotation();
 		map.setCenter(new google.maps.LatLng(user.x, user.y));
