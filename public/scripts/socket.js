@@ -4,7 +4,8 @@ socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
 
-    socket.on('init', function(data) {
+    socket.on('init', function(rdata) {
+        var data=rdata.data;
         $('#loginScreen').hide(); $('#info').show();
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
