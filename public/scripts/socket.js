@@ -25,7 +25,7 @@ socket.on('connect', function() {
 			audioPlay('exl');
 		});
 	});
-    socket.on('fail',function(data){
+    socket.on('error',function(data){
         console.log('user exsit');
         $('#msg').text('Account already exist');
     });
