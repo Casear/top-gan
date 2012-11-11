@@ -106,15 +106,19 @@ function attacked(data, type) {
         var newlat = loc.increX;//+ shot_increX;
         var newlng = loc.increY;//+ shot_increY;
 
-        if (loc.orgX < user.x) {
-            newlat = loc.increX + loc.speed;
-        } else {
-            newlat = loc.increX - loc.speed;
+        if (Math.abs(loc.orgX - user.x) > 0.2) {
+            if (loc.orgX < user.x) {
+                newlat = loc.increX + loc.speed;
+            } else {
+                newlat = loc.increX - loc.speed;
+            }
         }
-        if (loc.orgY < user.y) {
-            newlng = loc.increY + loc.speed;
-        } else {
-            newlng = loc.increY - loc.speed;
+        if (Math.abs(loc.orgY - user.y) > 0.2) {
+            if (loc.orgY < user.y) {
+                newlng = loc.increY + loc.speed;
+            } else {
+                newlng = loc.increY - loc.speed;
+            }
         }
 
         console.log('lat: ' + newlat + ', lng: ' + newlng);
@@ -122,7 +126,7 @@ function attacked(data, type) {
         loc.myshot.setPosition(new google.maps.LatLng(newlat, newlng));
         loc.increX = newlat;
         loc.increY = newlng;
-        shooting({user.name, user.x, user.y, loc.target);
+        shooting(user.name, user.x, user.y, loc.target);
     }, 500);
 }
 
