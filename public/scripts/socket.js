@@ -1,9 +1,11 @@
 
+
 socket = io.connect();
 socket.on('connect', function() {
     console.log('Client has connected to the server!');
 
-    socket.on('init', function(data) {
+    socket.on('init', function(rdata) {
+        var data=rdata.data;
         $('#loginScreen').hide(); $('#info').show();
         console.log('socket.on init, data:' + data);
 		user = { name:data.name, x:data.x, y:data.y, r:data.r, plane:data.plane };
@@ -13,6 +15,7 @@ socket.on('connect', function() {
 
 	    socket.on('war', function(data) {
 			//console.log('socket.on war, data:' + data);
+			players = data;
 			setMarker(data);
 		});
 
@@ -24,7 +27,8 @@ socket.on('connect', function() {
 		socket.on('attacked', function(data) {
 			//console.log('socket.on attacked, data:' + data);
 			// bomb();
-			audioPlay('exl');
+			// audioPlay('exl');
+			attacked(data);
 		});
 	});
     socket.on('error',function(data){
@@ -81,8 +85,7 @@ function unlock() {
 function attack(name) {
 	// console.log('call socket.emit attack, name: ' + name );
 	audioPlay('missle');
-	shot(name);
-	socket.emit('attack', name );
+	socket.emit('attack', { name: user.name, x: user.x, y: user.y, r: user.r } );
 }
 
 function audioPlay(name) {
@@ -92,57 +95,6 @@ function audioPlay(name) {
 function audioStop(name) {
 	var obj = document.getElementById(name);
 	obj.pause();
-}
-
-
-var shot_x = 0, shot_y = 0;
-var shot_increX = 0, shot_increY = 0;
-
-function shot(name) {
-	var imgPath = 'images/fighter' + user.plane.type[1] + '.png' ;
-
-	var myimage = new google.maps.MarkerImage(
-		imgPath,
-		null, // size
-		null, // origin
-		new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-		new google.maps.Size( 50, 50 ) // scaled size (required for Retina display icon)
-	);
-
-	var myshot = new google.maps.Marker({
-		flat: true,
-		icon: myimage,
-		map: map,
-		optimized: false,
-		position: new google.maps.LatLng(user.x, user.y),
-		visible: true
-	});
-	
-	// shot_x = user.x;
-	// shot_y = user.y;
-
-	window.setInterval(function() {
-		shotRotation();
-		var newlat = shot_x + user.x + shot_increX;
-		var newlng = shot_y + user.y + shot_increY;
-		if (newlat > 80) newlat = newlat - 160;
-
-		console.log('lat: ' + newlat + ', lng: ' + newlng);
-
-		myshot.setPosition(new google.maps.LatLng(newlat, user.y));
-		shot_x = newlat;
-		shot_y = newlng;
-		// fly(user.name, user.x, user.y, user.r);
-		// myPlane.setPosition(new google.maps.LatLng(user.x, user.y));
-		// map.setCenter(new google.maps.LatLng(user.x, user.y));
-	},500);
-}
-
-function shotRotation() {
-	//sin 10 = 0.173648178
-	//cos 10 = 0.984807753
-		shot_increX = 0.3 *  Math.sin( ( 90 - deg ) / 180 * Math.PI);
-		shot_increY = - 0.3 *  Math.cos( ( 90 - deg ) / 180 * Math.PI);
 }
 
 document.onkeydown =  function(evt) {
