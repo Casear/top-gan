@@ -59,7 +59,7 @@ socket.on('connect', function() {
 		//console.log('socket.on system, data:' + data.msg);
 	});
     socket.on('message',function(data){
-        $('#lbMessage').prepend('<div style="margin:3px"><span>'+data.name+'</span><span>'+data.msg+'</span></div>');
+        $('#lbMessage').prepend('<div style="margin:3px;color:white"><span>'+data.name+'</span>&nbsp;:&nbsp;<span>'+data.msg+'</span></div>');
     });
 });
 
@@ -69,7 +69,7 @@ function join(name, country, aircraft) {
 }
 
 function sendMessage(name,message){
-    $('#lbMessage').prepend('<div style="margin:3px"><span>'+data.name+'</span><span>'+data.msg+'</span></div>');
+    $('#lbMessage').prepend('<div style="margin:3px;color:white"><span>'+name+'</span>&nbsp;:&nbsp;<span>'+message+'</span></div>');
     socket.emit('message', { name: name, msg:message});
 }
 

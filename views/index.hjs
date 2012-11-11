@@ -63,7 +63,7 @@
                         join($.trim(a.val()),b.text(),flightType);
                         });
             $('#btnB').click(function(){
-                    
+                        sendMessage(user.name,$('#tbMessage').val());                    
                     
                     });
     });      
@@ -128,7 +128,7 @@
         <div class="form-search">
         <input type='text' id='tbMessage' placeholder="Message"></input><button id='btnB' class='btn'>Send</button> 
     </div>
-        <div id='lbMessage' style='float:left;width:400px;height:100px;overflow:auto'> 
+        <div id='lbMessage' style='float:left;width:700px;height:100px;overflow:auto'> 
 
 
         </div>  
