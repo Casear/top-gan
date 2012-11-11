@@ -41,6 +41,7 @@ var shot_x = 0, shot_y = 0;
 var shot_increX = 0, shot_increY = 0;
 var index = 0;
 function shot(name, type) {
+
     var loc = {
         target: name,
         creX: user.x,
@@ -48,10 +49,20 @@ function shot(name, type) {
         increX: 0,
         increY: 0,
         limited: 10,
-        speed: (type == 2) ? weapon.bomb.speed : weapon.missile.speed
+        speed: (type == 2) ? weapon.bomb.speed : weapon.missile.speed,
         attack: null,
-
+        destination: null
     };
+
+    $.each(plyers, function(i, value){
+        console.log(value);
+        if (value.name == name) {
+            destination = value;
+        }
+    });
+
+    if (!loc.destination) return;
+
     if (type == 2) {
         if (weapon.bomb.count < 1) return; 
         weapon.bomb.count --;
@@ -81,11 +92,12 @@ function shot(name, type) {
 
     loc.attack = window.setInterval(function() {
         // console.log(loc.limited);
-
         if (loc.limited <= 0) {
             window.clearInterval(loc.attack);
         }
         loc.limited--;
+
+
  
         // shotRotation();
         var newlat = shot_x +0.2;//+ shot_increX;
