@@ -20,7 +20,7 @@ function initialize_map() {
 		mapTypeControl: false,
 		scaleControl: false,
 		draggable: false,
-		//disableDoubleClickZoom : true,
+		disableDoubleClickZoom : true,
 		mapTypeId: google.maps.MapTypeId.SATELLITE
 	};
 	

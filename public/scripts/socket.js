@@ -22,6 +22,19 @@ socket.on('connect', function() {
 	    socket.on('war', function(data) {
 			//console.log('socket.on war, data:' + data);
 			players = data;
+            if($('#point_'+data.name).length==0)
+            {
+                var np= $(" <div id='point' style='position: absolute;z-index:99999'><img src='/images/yellowPoint.png'/></div>");
+                $('#m').append(np);
+                var tmpy=(data.y+180)/360*237;
+                var tmpx=(90-data.x)/180*100;
+                np.css('left',tmpy).css('top',tmpx);
+            }else{
+                var tmpy=(data.y+180)/360*237;
+                var tmpx=(90-data.x)/180*100;
+                $('#point_'+data.name).css('left',tmpy).css('top',tmpx);
+            
+            }
 			setMarker(data);
 		});
 
@@ -39,7 +52,7 @@ socket.on('connect', function() {
 			//console.log('socket.on hit, data:' + data);
 			var items = Math.round(Math.random()*5);
 			var count = $('#c1').text();
-			$('#c1').text(count + parseInt(items,10));
+			$('#c1').text(parseInt(count,10) + parseInt(items,10));
 			alert('you win, you get ' +  items + ' missile!');
 		});
 	});
@@ -48,7 +61,11 @@ socket.on('connect', function() {
     });
     socket.on('userleaved',function(data){
         $('#list_'+data).remove();
-        removeMarker(data)
+        removeMarker(data);
+        if($('#point_'+data).length==0)
+        {
+            $('#point_'+data).remove();
+        }
         $('#totalVal').text($('.users').children().length-1); 
     });
     socket.on('error',function(data){

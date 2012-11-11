@@ -156,7 +156,7 @@
         </table>
     </div>
     <div class='mainGame'>
-        <div style="width:900px; height:500px; overflow: hidden; position: relative; float: left;">
+        <div id='m' style="width:900px; height:500px; overflow: hidden; position: relative; float: left;">
             <div id="map_canvas" style="z-index:100;width:1000px; height:1000px; position: absolute; top: 50%; left: 50%; margin-top: -500px; margin-left: -500px;"></div>
        
        
