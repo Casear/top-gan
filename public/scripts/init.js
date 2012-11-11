@@ -27,6 +27,7 @@ var countries={
         y:121.007089
     }
 }
+var weapon = { missile: { count: 10, shoted: {} }, bomb: { count: 5, shoted: {} } };
 
 window.onload = function() {
 	//initialize_map();
