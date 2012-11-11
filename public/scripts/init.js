@@ -116,14 +116,14 @@ function attacked(data, type) {
         var newlng = loc.increY;//+ shot_increY;
 
         //if (Math.abs(loc.orgX - user.x) > 0.2) {
-            if (loc.orgX < user.x) {
+            if (loc.increX < user.x) {
                 newlat = loc.increX + loc.speed;
             } else {
                 newlat = loc.increX - loc.speed;
             }
         //}
         //if (Math.abs(loc.orgY - user.y) > 0.2) {
-            if (loc.orgY < user.y) {
+            if (loc.increY < user.y) {
                 newlng = loc.increY + loc.speed;
             } else {
                 newlng = loc.increY - loc.speed;
