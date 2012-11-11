@@ -82,10 +82,10 @@ function unlock() {
 	audioStop('lock');
 }
 
-function attack(name) {
+function shoot(name) {
 	// console.log('call socket.emit attack, name: ' + name );
 	audioPlay('missle');
-	socket.emit('attack', { name: user.name, x: user.x, y: user.y, r: user.r } );
+	socket.emit('shoot', { name: user.name, x: user.x, y: user.y, r: user.r } );
 }
 
 function audioPlay(name) {
