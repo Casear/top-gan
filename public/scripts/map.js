@@ -53,6 +53,7 @@ function initialize_map() {
 		var newlat = user.x + increX;
 		var newlng = user.y + increY;
 		if (newlat > 80) newlat = newlat - 160;
+		console.log(increX,increY);
 		user.x = newlat;
 		user.y = newlng;
 		fly(user.name, user.x, user.y, user.r);
@@ -96,8 +97,8 @@ function PlaneRotation() {
 		// increX = PlaneUnitPath *  Math.sin( ( 90 - user.r ) / 180 * Math.PI);
 		// increY = PlaneUnitPath *  Math.cos( ( 90 + user.r ) / 180 * Math.PI);
 		increX = PlaneUnitPath *  Math.sin( ( 90 - deg ) / 180 * Math.PI);
-		increY = PlaneUnitPath *  Math.cos( ( 90 + deg ) / 180 * Math.PI);
-		console.log(deg , increX , increY);
+		increY = - PlaneUnitPath *  Math.cos( ( 90 - deg ) / 180 * Math.PI);
+		//console.log(deg , Math.sin( ( 90 - deg ) / 180 * Math.PI) , Math.cos( ( 90 - deg ) / 180 * Math.PI));
 }
 
 
