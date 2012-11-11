@@ -95,11 +95,12 @@ function attacked(data, type) {
 
         if (Math.abs(user.y - loc.increY) < 0.2) {
             window.clearInterval(loc.attack);
-            setBomb(user.x, user.y);
+            setBomb(user.name, user.x, user.y, loc.target);
             hitted(data);
         }
         if (loc.limited <= 0) {
             window.clearInterval(loc.attack);
+            setBomb(user.name, user.x, user.y, loc.target);
         }
         loc.limited--;
 
@@ -126,14 +127,14 @@ function attacked(data, type) {
         loc.myshot.setPosition(new google.maps.LatLng(newlat, newlng));
         loc.increX = newlat;
         loc.increY = newlng;
-        shooting(user.name, user.x, user.y, loc.target);
+        shooting(user.name + '_' + loc.target, user.x, user.y, 0);
     }, 500);
 }
 
-function setBomb(x, y) {
+function setBomb(name, x, y, target) {
     audioPlay('expl');
     var image = new google.maps.MarkerImage(
-        'images/star.png',
+        'images/Explosion1.png',
         null, // size
         null, // origin
         new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
@@ -148,7 +149,7 @@ function setBomb(x, y) {
         position: new google.maps.LatLng(x, y),
         visible: true
     });
-    // myshot.setPosition(new google.maps.LatLng(x, y));
+    shooting(name + '_' + target, user.x, user.y, 0);
 }
 
 window.onload = function() {
