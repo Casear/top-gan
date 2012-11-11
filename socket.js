@@ -106,11 +106,11 @@ module.exports = function(app) {
 
             socket.on('fly', function(plane) {
                 getAirplane(plane.name,function(data){
-                    aPlane.x = data.x;
-                    aPlane.y = data.y;
-                    aPlane.r = data.r;
-                    store.hset('airplanes',plane.name,JSON.stringify(aPlane),function(){
-                        socket.broadcast.emit('war',aPlane); 
+                    data.x =plane.x;
+                    data.y =plane.y;
+                    data.r =plane.r;
+                    store.hset('airplanes',plane.name,JSON.stringify(data),function(){
+                        socket.broadcast.emit('war',data); 
                     });
                 });
                 
