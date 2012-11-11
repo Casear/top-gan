@@ -39,7 +39,7 @@ var weapon = {
         count: 10, speed: 0.2, shoted: [] 
     }, 
     bomb: { 
-        count: 5, speed: 0.2, shoted: [] 
+        count: 10, speed: 0.2, shoted: [] 
     } 
 };
 
