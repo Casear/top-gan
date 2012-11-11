@@ -109,6 +109,18 @@ module.exports = function(app) {
                 });
             });
 
+            socket.on('shoot',function(attackObj){
+                getAirplane(attackObj.target,function(data){
+                    io.sockets.socket(data.id).emit('attacked',attackObj);
+                });
+            });
+            
+            socket.on('hitted',function(attackObj){
+                getAirplane(attackObj.name,function(data){
+                    io.sockets.socket(data.id).emit('hit',attackObj);
+                });
+            });
+
             socket.on('fly', function(plane) {
                 getAirplane(plane.name,function(data){
                     data.x =plane.x;
