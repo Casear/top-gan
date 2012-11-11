@@ -34,7 +34,7 @@
         <script type="text/javascript" src="/scripts/css-rotate.js"></script>
         <script type="text/javascript" src="/scripts/init.js"></script>        
 
-        <script type="text/javascript" src="/scripts/citymap.js"></script>
+        <script type="text/javascript" src="/scripts/cityMap.js"></script>
         <script type="text/javascript" src="/scripts/map.js"></script>
         <script type="text/javascript" src="/scripts/socket.js"></script>
     </head>

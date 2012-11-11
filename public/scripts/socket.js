@@ -58,11 +58,19 @@ socket.on('connect', function() {
 	socket.on('system', function(data) {
 		//console.log('socket.on system, data:' + data.msg);
 	});
+    socket.on('message',function(data){
+        $('#lbMessage').prepend('<div style="margin:3px"><span>'+data.name+'</span><span>'+data.msg+'</span></div>');
+    });
 });
 
 function join(name, country, aircraft) {
 	//console.log('call socket.emit join, name:' + name + ', country:' + country + ', aircraft:' + aircraft);
 	socket.emit('join', { name: name, country: country, type: aircraft , x:countries[country].x,y:countries[country].y });
+}
+
+function sendMessage(name,message){
+    $('#lbMessage').prepend('<div style="margin:3px"><span>'+data.name+'</span><span>'+data.msg+'</span></div>');
+    socket.emit('message', { name: name, msg:message});
 }
 
 function fly(name, x, y, r) {
