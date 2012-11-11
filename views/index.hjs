@@ -103,34 +103,24 @@
 </audio>
 
 <div>
-    <div id="info"> 
-        <table border="0">
+    <div id="info" class='hide'> 
+        <table class='menu' border="0">
             <tr>
                 <td>
                     <img src="/images/heart.png"></img>
-                    <img src="/images/hBar1.png"></img>
+                    <img src="/images/hBar1.jpg"></img>
                 </td>
-                <td><span>Max</span></td>
-                <td><span>5</span></td>
-                <td><span>10</span></td>
-                <td><span>0</span></td>
-                <td>
-                    <img src="/images/icon8_N.png"></img>
-                </td>
+                
+                <td><span style='color:white'>5</span></td>
+                <td><span style='color:white'>10</span></td>
+                <td><span style='color:white'>0</span></td>
             </tr>
             <tr>
-                <td>
-                    <img src="/images/star.png"></img>
-                    <img src="/images/sBar1.png"></img>
-                </td>
+                <td></td>
+               
                 <td><img src="/images/icon1_N.png"></img></td>
                 <td><img src="/images/icon2_N.png"></img></td>
                 <td><img src="/images/icon3_N.png"></img></td>
-                <td><img src="/images/icon4_N.png"></img></td>
-                <td>
-                    <img src="/images/icon5_N.png"></img>
-                    <img src="/images/icon6_N.png"></img>
-                </td>
             </tr>
         </table>
     </div>
