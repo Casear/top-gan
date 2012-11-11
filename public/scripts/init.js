@@ -4,28 +4,34 @@ var deg = 0;
 var countries={
     "USA":{
         x: 39.866745,
-        y: -98.051373
+        y: -98.051373,
+        flag:'USA.jpg'
     },
     "Korea":{
         x:36.204317,
-        y:127.868271
+        y:127.868271,
+        flag:'korea.gif'
     },
     "China":{
         x:33.819698,
-        y:102.890634
+        y:102.890634,
+        flag:'china.jpg'
     },
     "India":{
         x:20.349177,
-        y:78.676767
+        y:78.676767,
+        flag:'india.gif'
     
     },
     "European Union":{
         x:49.435569,
-        y:16.94459
+        y:16.94459,
+        flag:'eu.png'
     },
     "Taiwan":{
         x:23.759624,
-        y:121.007089
+        y:121.007089,
+        flag:'Taiwan.gif'
     }
 }
 var weapon = { 
