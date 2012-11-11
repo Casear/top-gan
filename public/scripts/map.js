@@ -9,7 +9,7 @@ function initialize_map() {
 	var latlng = new google.maps.LatLng(user.x, user.y);
 	console.log(user.x + " & " + user.y);
 	var myOptions = {
-		zoom: 8,
+		zoom: 7,
 		center: latlng,
 		disableDefaultUI: true,
 		scrollwheel: false,
