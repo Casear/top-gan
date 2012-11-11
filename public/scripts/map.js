@@ -243,13 +243,15 @@ var lockplanename ='' ;
 var arrayMissle = [];
 function setBomb( json)
 {
-	console.log(json.x,json.y);
-	if(json.status = 1)
+	
+	if(json.status == 1)
 	{
 		$.each(arrayMissle, function(i,v)
 		{
 			if(json.name == v.getTitle())
-			{v.setMap(null);}
+			{
+				console.log('removeMarker');
+				v.setMap(null);}
 		})
 	}
 		
@@ -259,6 +261,7 @@ function setBomb( json)
 	{
 		if(json.name == v.getTitle())
 		{
+			console.log(json.x,json.y,json.status );
 			v.setPosition(vLatLng);
 			IsExist = 1;
 		}
