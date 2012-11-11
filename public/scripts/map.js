@@ -222,7 +222,46 @@ var IsExist = 0;
 	}
 }
 var lockplanename ='' ;
+var arrayMissle = [];
 function setBomb( json)
 {
-	console.log("Bomb  " +json.bomb);
+	console.log(json.x,json.y);
+	if(json.status = 1)
+	{
+		$.each(arrayMissle, function(i,v)
+		{
+			if(json.name == v.getTitle())
+			{v.setMap(null);}
+		})
+	}
+		
+	var IsExist = 0;
+	var vLatLng = new google.maps.LatLng( json.x, json.y);
+	$.each(arrayMissle, function(i,v)
+	{
+		if(json.name == v.getTitle())
+		{
+			v.setPosition(vLatLng);
+			IsExist = 1;
+		}
+	})
+	if(IsExist == 0)
+	{
+		var image = new google.maps.MarkerImage(
+				'images/bomb1.png',
+				null, // size
+				null, // origin
+				new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+				new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
+			);
+		arrayMissle[arrayMissle.length] = new google.maps.Marker({
+			flat: true,
+			icon: image,
+			map: map,
+			optimized: false,
+			position: vLatLng,
+			title: json.name,
+			visible: true
+		});
+	}
 }
