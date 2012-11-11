@@ -17,6 +17,7 @@ function initialize_map() {
 		mapTypeControl: false,
 		scaleControl: false,
 		draggable: false,
+		//disableDoubleClickZoom : true,
 		mapTypeId: google.maps.MapTypeId.SATELLITE
 	};
 	
@@ -53,7 +54,6 @@ function initialize_map() {
 		var newlat = user.x + increX;
 		var newlng = user.y + increY;
 		if (newlat > 80) newlat = newlat - 160;
-		console.log(increX,increY);
 		user.x = newlat;
 		user.y = newlng;
 		fly(user.name, user.x, user.y, user.r);
@@ -83,22 +83,23 @@ function initialize_map() {
 		// 	Fire();
 		// });
 }
-function Fire ()
+function Fire (name)
+{
+	attack(name);
+}
+function LockPlane(name)
+{
+	lock(name);
+}
+function unLockPlane()
 {
 
-	//Fire the Missile
-	alert('Fire the Missile');
-
 }
-
 function PlaneRotation() {
 	//sin 10 = 0.173648178
 	//cos 10 = 0.984807753
-		// increX = PlaneUnitPath *  Math.sin( ( 90 - user.r ) / 180 * Math.PI);
-		// increY = PlaneUnitPath *  Math.cos( ( 90 + user.r ) / 180 * Math.PI);
 		increX = PlaneUnitPath *  Math.sin( ( 90 - deg ) / 180 * Math.PI);
 		increY = - PlaneUnitPath *  Math.cos( ( 90 - deg ) / 180 * Math.PI);
-		//console.log(deg , Math.sin( ( 90 - deg ) / 180 * Math.PI) , Math.cos( ( 90 - deg ) / 180 * Math.PI));
 }
 
 
@@ -142,15 +143,17 @@ function setMarker (json)
 				google.maps.event.addListener(markersArray[index], 'mouseover', function() {
 					if(markersArray[index].getTitle() != user.name)
 					{
-						selMarker.setPosition(markersArray[index].getPosition());
-						selMarker.setVisible(true);
+						// selMarker.setPosition(markersArray[index].getPosition());
+						// selMarker.setVisible(true);
+						LockPlane(markersArray[index].getTitle());
 					}				
 				});
 				google.maps.event.addListener(markersArray[index], 'mouseout', function() {
-					selMarker.setVisible(false);
+					// selMarker.setVisible(false);
+					// unLockPlane();
 				});
 				google.maps.event.addListener(markersArray[index], 'click', function() {
-					Fire( );
+					Fire( markersArray[index].getTitle());
 				});
 			}
 			
