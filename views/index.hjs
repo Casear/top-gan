@@ -19,7 +19,7 @@
                     $(this).attr('class','e1_s');
                 });
             $('#e2').click(function(){
-                    flightType='f2';
+                    //flightType='f2';
                     //$('#e1').attr('class','e1');
                     //$(this).attr('class','e2_s');
                 });
@@ -145,7 +145,7 @@
                
             
                 <td><div id='e1' class='e1 e1_s'></div></td>
-                <td><div id='e2' class='e2'></div></td>
+                <td><div id='e2' class='e2_d'></div></td>
             </tr>
         </table>
     </div>

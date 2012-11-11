@@ -91,6 +91,13 @@ a {
   background-repeat: no-repeat;
   background-image: url("/images/icon2_P.png");
 }
+.e2_d {
+  width: 84px;
+  height: 84px;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("/images/icon2_D.png");
+}
 .f1 {
   width: 84px;
   height: 84px;
