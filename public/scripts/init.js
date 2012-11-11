@@ -100,10 +100,12 @@ function attacked(data, type) {
             window.clearInterval(loc.attack);
             setBomb(user.name, user.x, user.y, loc.target);
             hitted(data);
+            loc.myshot = null;
         }
         if (loc.limited <= 0) {
             window.clearInterval(loc.attack);
             setBomb(user.name, user.x, user.y, loc.target);
+            loc.myshot = null;
         }
         loc.limited--;
 
