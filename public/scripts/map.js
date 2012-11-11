@@ -142,6 +142,7 @@ function removeMarker(name)
 }
 function Lose()
 {
+
 	PlaneUnitPath = 0;
 	window.clearInterval(planeInterval);
 	var image = new google.maps.MarkerImage(
@@ -158,7 +159,8 @@ function Lose()
         map: map,
         optimized: false,
         position: new google.maps.LatLng(user.x, user.y),
-        visible: true
+        visible: true,
+        zindex:1001
     });
 }
 
@@ -257,22 +259,6 @@ function setBomb( json)
 	{
 		if(json.name == v.getTitle())
 		{
-			var image = new google.maps.MarkerImage(
-				'images/bomb1.png',
-				null, // size
-				null, // origin
-				new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-				new google.maps.Size( 20, 20 ) // scaled size (required for Retina display icon)
-			);
-			arrayMissle[arrayMissle.length] = new google.maps.Marker({
-				flat: true,
-				icon: image,
-				map: map,
-				optimized: false,
-				position: vLatLng,
-				title: json.name,
-				visible: true
-			});
 			v.setPosition(vLatLng);
 			IsExist = 1;
 		}

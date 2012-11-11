@@ -111,7 +111,8 @@ function shoot(name) {
 	// console.log('call socket.emit attack, name: ' + name );
 	
 	var count = $('#c1').text();
-	if (count != "0") {
+	if (count != "0" && !isShot) {
+		isShot = true;
 		audioPlay('missle');
 		count --;
 

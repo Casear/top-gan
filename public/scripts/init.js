@@ -1,5 +1,6 @@
 var user;
 var players;
+var isShot = false;
 var deg = 0;
 var countries={
     "USA":{
@@ -96,14 +97,18 @@ function attacked(data, type) {
             ' | diff, x: ' + (loc.increX - user.x) + ', y: ' + (loc.increY - user.y)
             );
 
-        if (Math.abs(user.y - loc.increY) < 0.2) {
+        if (Math.abs(user.x - loc.increX) < 0.2 && Math.abs(user.y - loc.increY) < 0.2) {
             window.clearInterval(loc.attack);
-            setBomb(user.name, user.x, user.y, loc.target);
+            isShot = false;
+            setBomb(user.name, loc.increX, loc.increY, loc.target);
             hitted(data);
+            //loc.myshot = null;
         }
         if (loc.limited <= 0) {
+            isShot = false;
             window.clearInterval(loc.attack);
-            setBomb(user.name, user.x, user.y, loc.target);
+            setBomb(user.name, loc.increX, loc.increY, loc.target);
+            //loc.myshot = null;
         }
         loc.limited--;
 
@@ -130,7 +135,7 @@ function attacked(data, type) {
         loc.myshot.setPosition(new google.maps.LatLng(newlat, newlng));
         loc.increX = newlat;
         loc.increY = newlng;
-        shooting(user.name + '_' + loc.target, user.x, user.y, 0);
+        shooting(user.name + '_' + loc.target, loc.increX, loc.increY, 0);
     }, 500);
 }
 
@@ -152,7 +157,7 @@ function setBomb(name, x, y, target) {
         position: new google.maps.LatLng(x, y),
         visible: true
     });
-    shooting(name + '_' + target, user.x, user.y, 0);
+    shooting(name + '_' + target, x, y, 0);
 }
 
 window.onload = function() {
